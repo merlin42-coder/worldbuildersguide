@@ -17,43 +17,55 @@ export const WatchCard = ({ item, featured = false, onPlay }: Props) => {
       onClick={() => onPlay?.(item)}
       className={`group card-hover bg-elevated border ${
         featured ? "border-sage/40" : "border-hairline"
-      } overflow-hidden cursor-pointer flex flex-col text-left w-full`}
+      } rounded-lg overflow-hidden cursor-pointer flex flex-col text-left w-full`}
     >
       <div className="relative">
-        <AbstractThumb variant={item.variant} className="border-0 border-b border-hairline" />
-        {isAudio && <div className="absolute inset-0 bg-background/45" />}
-
-        <div className="absolute inset-0 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+        {item.thumbnailUrl ? (
+          <div className="relative w-full aspect-[16/9] overflow-hidden bg-elevated-2 border-b border-hairline">
+            <img
+              src={item.thumbnailUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <AbstractThumb variant={item.variant} className="border-0 border-b border-hairline" />
+        )}
+        {isAudio && (
+          <div className="absolute inset-0 bg-background/55 mix-blend-multiply" />
+        )}
+        {isAudio && (
           <div
-            className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 ${
+            className="absolute inset-0"
+            style={{ backgroundColor: "hsl(var(--accent-sage) / 0.18)" }}
+          />
+        )}
+
+        <div className="absolute inset-0 flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+          <div
+            className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg ${
               isAudio
                 ? "bg-background/85 backdrop-blur border border-sage/50 text-sage"
-                : "bg-sage/95 text-background"
+                : "bg-sage text-background"
             }`}
           >
             {isAudio ? (
-              <Headphones size={16} strokeWidth={1.6} />
+              <Headphones size={16} strokeWidth={1.8} />
             ) : (
-              <Play size={18} className="ml-0.5" />
+              <Play size={18} className="ml-0.5" fill="currentColor" />
             )}
           </div>
         </div>
 
         <div className="absolute top-3 left-3">
-          <span
-            className={`text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-sm font-medium border ${
-              isAudio
-                ? "bg-background/70 backdrop-blur text-sage border-sage/40"
-                : "bg-background/70 backdrop-blur text-ink border-hairline"
-            }`}
-          >
+          <span className={isAudio ? "tag tag-accent backdrop-blur" : "tag backdrop-blur"}>
             {isAudio ? "Deep Dive" : item.category === "Head to Head" ? "Head to Head" : "Watch"}
           </span>
         </div>
         <div className="absolute top-3 right-3">
-          <span className="text-[10px] tracking-wider bg-background/70 backdrop-blur text-ink-muted border border-hairline px-2 py-0.5 rounded-sm">
-            {item.duration}
-          </span>
+          <span className="tag backdrop-blur">{item.duration}</span>
         </div>
       </div>
 
