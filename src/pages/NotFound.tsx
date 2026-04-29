@@ -1,5 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,15 +11,27 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
-    </div>
+    <>
+      <Nav />
+      <main className="min-h-[70vh] flex items-center">
+        <div className="container-wbg text-center py-32">
+          <div className="eyebrow mb-6">404</div>
+          <h1 className="font-display text-5xl md:text-7xl text-ink leading-tight">
+            That world doesn't exist yet.
+          </h1>
+          <p className="mt-6 text-ink-muted max-w-md mx-auto">
+            The page you're looking for isn't here. Let's get you back on the map.
+          </p>
+          <Link
+            to="/"
+            className="mt-10 inline-flex items-center rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
+          >
+            Return home
+          </Link>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
