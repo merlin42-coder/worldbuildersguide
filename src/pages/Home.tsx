@@ -42,31 +42,25 @@ const Home = () => {
           <div className="container-wbg pt-16 md:pt-24 pb-20 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7">
               <Reveal>
-                <div className="eyebrow mb-6">A Product Strategy Studio</div>
+                <div className="eyebrow mb-6">A product strategy studio</div>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="font-display text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] text-ink tracking-tight">
-                  Build products that feel coherent.
+                  Make products people just get.
                 </h1>
               </Reveal>
               <Reveal delay={180}>
                 <p className="mt-7 max-w-xl text-lg text-ink-muted leading-relaxed">
-                  We analyze and design product worlds so users instantly understand what matters, how things work, and why they should care.
+                  We pull apart how Spotify, Airbnb and Revolut feel so simple — then help you do the same with yours.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <Link
-                    to="/watch"
-                    className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
-                  >
-                    Watch the Library <ArrowRight size={16} />
+                  <Link to="/watch" className="btn-primary">
+                    Watch the videos <ArrowRight size={16} />
                   </Link>
-                  <Link
-                    to="/work-with-us"
-                    className="inline-flex items-center gap-2 rounded-full border border-hairline-strong px-5 py-3 text-sm font-medium text-ink hover:border-sage transition-colors"
-                  >
-                    Work With Us
+                  <Link to="/work-with-us" className="btn-default">
+                    Work with us
                   </Link>
                 </div>
               </Reveal>
@@ -85,7 +79,7 @@ const Home = () => {
           <div className="container-wbg py-14">
             <Reveal>
               <p className="text-center text-sm md:text-base text-ink-muted">
-                Used to rethink products through psychology, systems, and user behavior.
+                A way of looking at products through people, habits and small design choices.
               </p>
             </Reveal>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 opacity-60">
@@ -107,12 +101,12 @@ const Home = () => {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <Reveal>
                 <h2 className="font-display text-4xl md:text-5xl text-ink max-w-2xl leading-tight">
-                  Watch Product Worlds
+                  Watch how products tick
                 </h2>
               </Reveal>
               <Reveal delay={100}>
                 <p className="text-ink-muted max-w-md">
-                  Short video breakdowns showing why some products feel effortless while others feel chaotic.
+                  Short videos that pull apart why some apps feel effortless — and others feel like a mess.
                 </p>
               </Reveal>
             </div>
@@ -123,11 +117,7 @@ const Home = () => {
                   <button
                     key={t}
                     onClick={() => setTab(t)}
-                    className={`px-4 py-2 text-sm rounded-full border transition-colors ${
-                      tab === t
-                        ? "border-sage text-ink bg-sage/10"
-                        : "border-hairline text-ink-muted hover:text-ink hover:border-hairline-strong"
-                    }`}
+                    className={`seg ${tab === t ? "seg-active" : ""}`}
                   >
                     {t}
                   </button>
