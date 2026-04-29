@@ -8,23 +8,25 @@ import { FloatingTiles } from "@/components/site/FloatingTiles";
 import { WatchCard } from "@/components/site/WatchCard";
 import { ContactForm } from "@/components/site/ContactForm";
 import { FinalCTA } from "@/components/site/FinalCTA";
-import { watchContent, type WatchCategory } from "@/content/watchContent";
+import { MediaModal } from "@/components/site/MediaModal";
+import { publishedWatchContent, type WatchCategory, type WatchItem } from "@/content/watchContent";
 import { useCases } from "@/content/useCases";
 import { pillars } from "@/content/pillars";
 import { services } from "@/content/services";
 
-const tabs: WatchCategory[] = ["Product Worlds", "Breakdowns", "Head to Head"];
+const tabs: WatchCategory[] = ["Product Worlds", "Deep Dives", "Head to Head"];
 
 const TRUST_LOGOS = ["FOUNDERS·FUND", "RADIX", "NORTHWAVE", "MERIDIAN", "SUNDIAL", "OAKHAUS"];
 
 const Home = () => {
   const [tab, setTab] = useState<WatchCategory>("Product Worlds");
-  const visible = watchContent.filter((w) => w.category === tab).slice(0, 6);
-  // Ensure 6 cards by padding from other categories if needed
+  const [active, setActive] = useState<WatchItem | null>(null);
+  const visible = publishedWatchContent.filter((w) => w.category === tab);
+  // Pad from other categories if a tab is light, so the grid stays full.
   const padded = [...visible];
-  if (padded.length < 6) {
-    for (const w of watchContent) {
-      if (padded.length >= 6) break;
+  if (padded.length < 4) {
+    for (const w of publishedWatchContent) {
+      if (padded.length >= 4) break;
       if (!padded.find((p) => p.id === w.id)) padded.push(w);
     }
   }
@@ -58,7 +60,7 @@ const Home = () => {
                     to="/watch"
                     className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
                   >
-                    Watch Free Breakdown <ArrowRight size={16} />
+                    Watch the Library <ArrowRight size={16} />
                   </Link>
                   <Link
                     to="/work-with-us"
@@ -134,23 +136,27 @@ const Home = () => {
                   to="/watch"
                   className="ml-auto self-center text-sm text-ink-muted hover:text-ink inline-flex items-center gap-1"
                 >
-                  All breakdowns <ArrowUpRight size={14} />
+                  Browse all <ArrowUpRight size={14} />
                 </Link>
               </div>
             </Reveal>
 
             <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300" key={tab}>
-              <Reveal className="lg:col-span-2 lg:row-span-1">
-                <div className="lg:scale-100">
-                  <WatchCard item={featured} featured />
-                </div>
-              </Reveal>
-              <Reveal delay={60}>
-                <WatchCard item={rest[0]} />
-              </Reveal>
+              {featured && (
+                <Reveal className="lg:col-span-2 lg:row-span-1">
+                  <div className="lg:scale-100">
+                    <WatchCard item={featured} featured onPlay={setActive} />
+                  </div>
+                </Reveal>
+              )}
+              {rest[0] && (
+                <Reveal delay={60}>
+                  <WatchCard item={rest[0]} onPlay={setActive} />
+                </Reveal>
+              )}
               {rest.slice(1).map((it, i) => (
                 <Reveal key={it.id} delay={120 + i * 60}>
-                  <WatchCard item={it} />
+                  <WatchCard item={it} onPlay={setActive} />
                 </Reveal>
               ))}
             </div>
@@ -303,6 +309,7 @@ const Home = () => {
         <FinalCTA />
       </main>
       <Footer />
+      <MediaModal item={active} onClose={() => setActive(null)} />
     </>
   );
 };
