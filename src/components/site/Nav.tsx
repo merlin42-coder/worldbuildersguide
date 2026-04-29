@@ -88,7 +88,7 @@ export const Nav = () => {
             ))}
             <Link
               to="/watch"
-              className="mt-2 inline-flex w-fit items-center rameter rounded-full bg-sage px-4 py-2 text-sm font-medium text-background"
+              className="mt-2 inline-flex w-fit items-center rounded-full bg-sage px-4 py-2 text-sm font-medium text-background"
             >
               Watch the Library
             </Link>
