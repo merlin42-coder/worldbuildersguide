@@ -10,32 +10,32 @@ export interface UseCase {
 export const useCases: UseCase[] = [
   {
     icon: Layers,
-    title: "Your product feels messy after growth",
-    detail: "Features pile up faster than logic. We restore the underlying world.",
+    title: "Things got messy as you grew",
+    detail: "Features piled up faster than the logic behind them. We help it click again.",
   },
   {
     icon: Users,
-    title: "Teams disagree on priorities",
-    detail: "Disagreement is usually a missing shared model, not a missing roadmap.",
+    title: "The team can't agree on what's next",
+    detail: "Usually it's not a roadmap problem. It's that nobody shares the same picture of the product.",
   },
   {
     icon: Puzzle,
-    title: "New features feel disconnected",
-    detail: "We map why they don't belong — and what would make them belong.",
+    title: "New features feel bolted on",
+    detail: "We figure out why they don't fit — and what would make them feel like they always belonged.",
   },
   {
     icon: Compass,
-    title: "You need clarity before building",
-    detail: "Define the world first, then let scope follow naturally.",
+    title: "You want clarity before you build",
+    detail: "Decide what the product actually is first. Scope gets way easier after that.",
   },
   {
     icon: Sparkles,
-    title: "You want stronger emotional coherence",
-    detail: "How a product feels is a design output, not an accident.",
+    title: "You want it to feel like something",
+    detail: "How a product feels isn't an accident. It's a bunch of small choices done on purpose.",
   },
   {
     icon: Rocket,
-    title: "You are launching something new",
-    detail: "Set the rules of the world before users invent their own.",
+    title: "You're launching something new",
+    detail: "Set the rules of your little world before users start guessing them for you.",
   },
 ];

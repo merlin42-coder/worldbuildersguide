@@ -1,8 +1,8 @@
 const tiles = [
-  { name: "Spotify", meta: "Discovery as a feed", anim: "float-tile" },
-  { name: "Airbnb", meta: "Place as a story", anim: "float-tile-2" },
-  { name: "Revolut", meta: "Money as control", anim: "float-tile-3" },
-  { name: "YouTube Music", meta: "Library as a search", anim: "float-tile-4" },
+  { name: "Spotify", meta: "feels like it knows you", anim: "float-tile" },
+  { name: "Airbnb", meta: "feels like a real place", anim: "float-tile-2" },
+  { name: "Revolut", meta: "feels like control", anim: "float-tile-3" },
+  { name: "YouTube Music", meta: "feels like a search box", anim: "float-tile-4" },
 ];
 
 const Mini = ({ idx }: { idx: number }) => {

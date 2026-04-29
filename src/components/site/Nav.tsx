@@ -44,8 +44,10 @@ export const Nav = () => {
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `text-sm transition-colors hover:text-ink ${
-                  isActive ? "text-ink" : "text-ink-muted"
+                `text-sm transition-colors hover:text-ink relative pb-1 ${
+                  isActive
+                    ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-[2px] after:bg-sage"
+                    : "text-ink-muted"
                 }`
               }
             >
@@ -55,11 +57,8 @@ export const Nav = () => {
         </nav>
 
         <div className="hidden md:block">
-          <Link
-            to="/watch"
-            className="inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Watch the Library
+          <Link to="/watch" className="btn-primary">
+            Watch the videos
           </Link>
         </div>
 
@@ -86,11 +85,8 @@ export const Nav = () => {
                 {l.label}
               </NavLink>
             ))}
-            <Link
-              to="/watch"
-              className="mt-2 inline-flex w-fit items-center rounded-full bg-sage px-4 py-2 text-sm font-medium text-background"
-            >
-              Watch the Library
+            <Link to="/watch" className="btn-primary mt-2 w-fit">
+              Watch the videos
             </Link>
           </div>
         </div>

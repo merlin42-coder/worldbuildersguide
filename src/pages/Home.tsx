@@ -42,31 +42,25 @@ const Home = () => {
           <div className="container-wbg pt-16 md:pt-24 pb-20 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7">
               <Reveal>
-                <div className="eyebrow mb-6">A Product Strategy Studio</div>
+                <div className="eyebrow mb-6">A product strategy studio</div>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="font-display text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] text-ink tracking-tight">
-                  Build products that feel coherent.
+                  Make products people just get.
                 </h1>
               </Reveal>
               <Reveal delay={180}>
                 <p className="mt-7 max-w-xl text-lg text-ink-muted leading-relaxed">
-                  We analyze and design product worlds so users instantly understand what matters, how things work, and why they should care.
+                  We pull apart how Spotify, Airbnb and Revolut feel so simple — then help you do the same with yours.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <Link
-                    to="/watch"
-                    className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
-                  >
-                    Watch the Library <ArrowRight size={16} />
+                  <Link to="/watch" className="btn-primary">
+                    Watch the videos <ArrowRight size={16} />
                   </Link>
-                  <Link
-                    to="/work-with-us"
-                    className="inline-flex items-center gap-2 rounded-full border border-hairline-strong px-5 py-3 text-sm font-medium text-ink hover:border-sage transition-colors"
-                  >
-                    Work With Us
+                  <Link to="/work-with-us" className="btn-default">
+                    Work with us
                   </Link>
                 </div>
               </Reveal>
@@ -85,7 +79,7 @@ const Home = () => {
           <div className="container-wbg py-14">
             <Reveal>
               <p className="text-center text-sm md:text-base text-ink-muted">
-                Used to rethink products through psychology, systems, and user behavior.
+                A way of looking at products through people, habits and small design choices.
               </p>
             </Reveal>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 opacity-60">
@@ -107,12 +101,12 @@ const Home = () => {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <Reveal>
                 <h2 className="font-display text-4xl md:text-5xl text-ink max-w-2xl leading-tight">
-                  Watch Product Worlds
+                  Watch how products tick
                 </h2>
               </Reveal>
               <Reveal delay={100}>
                 <p className="text-ink-muted max-w-md">
-                  Short video breakdowns showing why some products feel effortless while others feel chaotic.
+                  Short videos that pull apart why some apps feel effortless — and others feel like a mess.
                 </p>
               </Reveal>
             </div>
@@ -123,11 +117,7 @@ const Home = () => {
                   <button
                     key={t}
                     onClick={() => setTab(t)}
-                    className={`px-4 py-2 text-sm rounded-full border transition-colors ${
-                      tab === t
-                        ? "border-sage text-ink bg-sage/10"
-                        : "border-hairline text-ink-muted hover:text-ink hover:border-hairline-strong"
-                    }`}
+                    className={`seg ${tab === t ? "seg-active" : ""}`}
                   >
                     {t}
                   </button>
@@ -167,11 +157,11 @@ const Home = () => {
         <section className="hairline-top py-28 md:py-40">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-4">Use Cases</div>
+              <div className="eyebrow mb-4">When this helps</div>
             </Reveal>
             <Reveal>
               <h2 className="font-display text-4xl md:text-5xl text-ink max-w-3xl leading-tight">
-                When to Use a World Builders Guide
+                When a World Builders Guide actually helps
               </h2>
             </Reveal>
 
@@ -193,7 +183,7 @@ const Home = () => {
 
             <Reveal delay={200}>
               <p className="mt-12 text-center italic text-ink-muted max-w-2xl mx-auto">
-                When products grow without shared world logic, friction compounds.
+                When a product grows without a shared picture of itself, friction quietly piles up.
               </p>
             </Reveal>
           </div>
@@ -208,12 +198,12 @@ const Home = () => {
             <div className="grid lg:grid-cols-12 gap-10">
               <Reveal className="lg:col-span-7">
                 <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                  Products Are Worlds
+                  Products are little worlds
                 </h2>
               </Reveal>
               <Reveal delay={100} className="lg:col-span-5">
                 <p className="text-ink-muted text-lg leading-relaxed">
-                  Every product teaches users a hidden system. Great products make that system feel natural.
+                  Every product quietly teaches you how it works. The good ones make that feel obvious. The bad ones make you guess.
                 </p>
               </Reveal>
             </div>
@@ -233,13 +223,10 @@ const Home = () => {
             <Reveal delay={120}>
               <div className="mt-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <p className="text-ink-muted max-w-xl">
-                  World Builders Guide helps teams define these foundations before complexity takes over.
+                  We help teams nail down these basics — before the product gets too big to keep in your head.
                 </p>
-                <Link
-                  to="/method"
-                  className="inline-flex items-center gap-2 rounded-full border border-hairline-strong px-5 py-3 text-sm font-medium text-ink hover:border-sage transition-colors w-fit"
-                >
-                  Explore Method <ArrowRight size={16} />
+                <Link to="/method" className="btn-default w-fit">
+                  See the method <ArrowRight size={16} />
                 </Link>
               </div>
             </Reveal>
@@ -250,17 +237,17 @@ const Home = () => {
         <section id="work" className="hairline-top py-28 md:py-40">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-4">Engagements</div>
+              <div className="eyebrow mb-4">Work together</div>
             </Reveal>
             <div className="grid lg:grid-cols-12 gap-10">
               <Reveal className="lg:col-span-7">
                 <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                  Work With Us
+                  Work with us
                 </h2>
               </Reveal>
               <Reveal delay={100} className="lg:col-span-5">
                 <p className="text-ink-muted text-lg leading-relaxed">
-                  For founders, product teams, and growing companies that need sharper product clarity.
+                  For founders and product teams who want their product to feel sharper — not just bigger.
                 </p>
               </Reveal>
             </div>
@@ -268,7 +255,7 @@ const Home = () => {
             <div className="mt-14 grid md:grid-cols-3 gap-6">
               {services.map((s, i) => (
                 <Reveal key={s.number} delay={i * 80}>
-                  <div className="card-hover bg-elevated border border-hairline p-7 h-full flex flex-col min-h-[260px]">
+                  <div className="card-hover bg-elevated border border-hairline rounded-lg p-7 h-full flex flex-col min-h-[260px]">
                     <div className="eyebrow text-sage">{s.number}</div>
                     <h3 className="mt-6 font-display text-2xl text-ink leading-snug">{s.name}</h3>
                     <p className="mt-3 text-sm text-ink-muted">{s.short}</p>
@@ -279,11 +266,8 @@ const Home = () => {
 
             <Reveal delay={200}>
               <div className="mt-10">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
-                >
-                  Start a Conversation <ArrowRight size={16} />
+                <a href="#contact" className="btn-primary">
+                  Start a chat <ArrowRight size={16} />
                 </a>
               </div>
             </Reveal>
@@ -294,7 +278,7 @@ const Home = () => {
                   Tell us what you're building.
                 </h3>
                 <p className="mt-4 text-ink-muted">
-                  Short and direct is best. We respond within two business days.
+                  Short and to the point is best. We get back within two business days.
                 </p>
               </Reveal>
               <div className="lg:col-span-7">

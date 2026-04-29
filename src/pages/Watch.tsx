@@ -45,13 +45,23 @@ const Watch = () => {
               <Reveal className="lg:col-span-7">
                 <button
                   onClick={() => setActive(featured)}
-                  className="relative block w-full group"
+                  className="relative block w-full group rounded-lg overflow-hidden border border-hairline"
                   aria-label={`Play ${featured.title}`}
                 >
-                  <AbstractThumb variant={featured.variant} />
+                  {featured.thumbnailUrl ? (
+                    <div className="relative w-full aspect-[16/9] bg-elevated-2">
+                      <img
+                        src={featured.thumbnailUrl}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <AbstractThumb variant={featured.variant} />
+                  )}
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="w-16 h-16 rounded-full bg-sage text-background flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <Play size={22} className="ml-1" />
+                    <span className="w-16 h-16 rounded-full bg-sage text-background flex items-center justify-center group-hover:scale-105 transition-transform shadow-xl">
+                      <Play size={22} className="ml-1" fill="currentColor" />
                     </span>
                   </span>
                 </button>
@@ -67,11 +77,8 @@ const Watch = () => {
                   <span className="w-1 h-1 rounded-full bg-ink-subtle" />
                   <span>{featured.duration}</span>
                 </div>
-                <button
-                  onClick={() => setActive(featured)}
-                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
-                >
-                  <Play size={14} /> Watch now
+                <button onClick={() => setActive(featured)} className="btn-primary mt-8">
+                  <Play size={14} fill="currentColor" /> Watch now
                 </button>
               </Reveal>
             </div>
@@ -86,11 +93,7 @@ const Watch = () => {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-4 py-2 text-sm rounded-full border transition-colors ${
-                    filter === f
-                      ? "border-sage text-ink bg-sage/10"
-                      : "border-hairline text-ink-muted hover:text-ink hover:border-hairline-strong"
-                  }`}
+                  className={`seg ${filter === f ? "seg-active" : ""}`}
                 >
                   {f}
                 </button>
@@ -104,7 +107,7 @@ const Watch = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search the library"
                 maxLength={120}
-                className="w-full bg-elevated border border-hairline rounded-full pl-9 pr-4 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-sage outline-none transition-colors"
+                className="input-ant pl-9"
               />
             </div>
           </div>

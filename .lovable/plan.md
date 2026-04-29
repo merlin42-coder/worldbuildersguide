@@ -1,107 +1,87 @@
 ## Goal
 
-Restructure the Watch library around the real catalog: 4 products × (Product World video + Deep Dive audio) + 1 Head to Head video. Drop Free/Premium entirely. Build native players for both video and audio. Rename "Breakdowns" → "Deep Dives" everywhere.
+Pull the site closer to Ant Design's structural language while keeping the dark editorial mood, swap the abstract video thumbnails for real frames pulled from each MP4, and rewrite the copy in a lively, friendly, 6th-grader-clear voice — no jargon, no corporate BS.
 
-## Final catalog
+---
 
-| Product | Product World (video) | Deep Dive (audio podcast) |
-|---|---|---|
-| Airbnb | ✓ | ✓ |
-| Spotify | ✓ | ✓ |
-| YouTube Music | ✓ | ✓ |
-| Revolut | ✓ | ✓ |
-| Spotify vs YouTube Music | Head to Head video | — |
+## 1. Design tokens — Ant-inspired, dark, Polar Green accent
 
-Total: **9 pieces** (5 videos + 4 audio deep dives).
+Update `src/index.css` and `tailwind.config.ts`:
 
-## Categories (used in filters + cards)
+- **Accent → Polar Green** (Ant ramp). New tokens:
+  - `--accent: 100 61% 45%` (Polar Green 6, ~`#52C41A`) as the primary action color
+  - `--accent-soft` (Polar Green 3) for hover tints
+  - `--accent-deep` (Polar Green 8) for pressed/active
+  - Keep variable name `--accent-sage` aliased to the new green so we don't have to touch every component at once; rename the Tailwind `sage` token to point at the new value (the class `bg-sage`/`text-sage` keeps working).
+- **Surfaces** — shift from warm charcoal to Ant's neutral dark grays:
+  - `--background: 0 0% 7%`, `--elevated: 0 0% 10%`, `--elevated-2: 0 0% 14%`
+  - `--hairline: 0 0% 18%`, `--hairline-strong: 0 0% 26%`
+- **Ink** — neutral off-white instead of warm cream: `--ink: 0 0% 98%`, `--ink-muted: 0 0% 65%`, `--ink-subtle: 0 0% 45%`.
+- **Radii** — Ant-tight: `--radius: 6px`; add `--radius-sm: 4px`, `--radius-lg: 8px`. Round-pill buttons drop to `rounded-md`.
+- **Typography** — keep Fraunces for display headings (editorial mood per chosen direction), but tighten body to Ant's stack feel with Inter at `text-[15px]` base line-height 1.6.
+- Add Ant-style component utilities in `@layer components`:
+  - `.btn-primary`, `.btn-default`, `.btn-ghost` (Ant button shapes: 32px h, 6px radius, 1px border, subtle hover lift via background tint not transform)
+  - `.tag` (small uppercase chip with 1px border and tinted background)
+  - `.input` (32px, 6px radius, focus ring = 2px Polar Green @ 20%)
 
-- **Product Worlds** — 4 video breakdowns, one per product
-- **Deep Dives** — 4 audio podcasts (m4a, 2-speaker, NotebookLM-generated)
-- **Head to Head** — 1 video (Spotify vs YouTube Music)
+## 2. Real video thumbnails
 
-"Breakdowns" is removed from the codebase entirely.
+- Add `thumbnailUrl?: string` to `WatchItem` in `src/content/watchContent.ts`.
+- Run a one-time ffmpeg pass over `public/videos/*.mp4`:
+  - Seek to ~10% of duration, grab one frame, scale to 1280×720, save JPEG q=82 to `public/thumbs/<id>.jpg`.
+  - Files generated: `spotify-product-world.jpg`, `airbnb-product-world.jpg`, `youtube-music-product-world.jpg`, `revolut-product-world.jpg`, `spotify-vs-youtube-music.jpg`.
+- Wire each video item's `thumbnailUrl` to its generated file.
+- For audio Deep Dives: reuse the matching brand's video frame, dimmed + Polar Green wash overlay so the cover still reads as "audio episode" (Headphones badge stays on top).
+- Update `WatchCard` and `Watch.tsx` hero to render `<img src={thumbnailUrl}>` when present, with `loading="lazy"`, `decoding="async"`, and the existing play/headphones overlay on top. `AbstractThumb` becomes the fallback only when `thumbnailUrl` is missing.
+- `MediaModal` video preview keeps the native player; we just remove the `AbstractThumb` from the audio modal header and use the same brand thumbnail there.
 
-## Approach
+## 3. Component pass — Ant shapes
 
-### 1. Content model
-Update `WatchItem` type:
-- Drop `isFree`.
-- Add `mediaType: "video" | "audio"`.
-- Add required `mediaUrl: string` (replaces the optional `videoUrl`).
-- Rename category `"Breakdowns"` → `"Deep Dives"`.
-- Keep `variant` for the abstract thumbnail look (audio cards get a distinct visual treatment — see below).
+Touch only what's needed to feel Ant-like; no full shadcn rewrite.
 
-### 2. Hosting
-- Videos → `public/videos/*.mp4` (≤35MB each, totals ~150MB for 5 videos — acceptable for v1).
-- Audio → `public/audio/*.m4a`.
-- Add a `<lov-link>` at the end so you can drop the rest of the files in via the chat upload when ready; the 4 already-uploaded MP4s get wired in this pass.
+- **Buttons** (Nav CTA, Hero CTAs, FinalCTA, Watch hero "Watch now"): switch from `rounded-full bg-sage` to Ant primary shape — `rounded-md` 6px, 1px border same as fill, height ~36px, background Polar Green 6, hover Polar Green 5, active Polar Green 7. Secondary becomes 1px hairline border on transparent with Polar Green border + text on hover.
+- **Filter pills** on `/watch` and Home tabs: Ant segmented look — square 6px radius, 1px hairline, active = Polar Green border + faint Polar Green tint. Drop `rounded-full`.
+- **Tags / eyebrows** on cards: replace pill chips with Ant tag (`.tag` utility) — uppercase still, but rectangular with subtle tinted background (`bg-sage/10 text-sage border-sage/30` for Deep Dive, neutral for Watch).
+- **Inputs**: Search input on `/watch` and `ContactForm` fields — square 6px radius, 1px hairline, 2px Polar Green focus ring.
+- **Cards**: `WatchCard` and the use-cases / pillars / services blocks — radius 8px (was effectively 0 / pill), border stays 1px hairline, hover swaps to `bg-elevated-2` and shifts border to Polar Green @ 30% (no Y-translate; Ant doesn't lift).
+- **Nav**: Logo stays serif. CTA becomes Ant primary square button. Active link gets a 2px Polar Green underline instead of just color shift.
 
-### 3. Players (one component, two modes)
-Single `MediaModal` component (Radix Dialog, dark backdrop, sage focus rings, closes on Esc / backdrop / X, pauses on close).
+## 4. Copy rewrite — Lively, Friendly, Conversational, 6th-grade clear
 
-- **Video mode:** native `<video controls preload="metadata" playsInline>` in a 16:9 frame.
-- **Audio mode:** abstract "podcast cover" visual on top (uses the card's `variant` thumbnail, larger), product name + "Deep Dive" label, then a native `<audio controls>` bar. Optional subtle waveform-style decoration (CSS only, no JS audio analysis).
+Voice rules:
+- Short sentences. Plain words. No "leverage", "coherence", "frictionless", "world model", "manufacture trust".
+- Warm, a little playful, talks to one person not a boardroom.
+- Keep the "Product Worlds" name — it's the brand — but explain it like a human would.
 
-### 4. Card visual differentiation
-Both card types share the same shape and grid, but signal medium clearly:
-- **Video cards:** existing thumbnail + a **play triangle** glyph in the corner badge area + duration ("7 min").
-- **Audio cards:** same abstract thumbnail with a tinted overlay + **headphones glyph** + "Deep Dive · 18 min" label. Slightly different accent treatment so the two feel related but distinct at a glance.
-- No FREE/PREMIUM badges anywhere.
-- All cards are clickable; clicking opens `MediaModal` in the right mode.
+Files and rewrites:
 
-### 5. Page structure changes
+- **`src/pages/Home.tsx`** — hero, trust line, watch intro, use-cases intro, method intro, work-with-us intro.
+  - Hero H1 example: *"Make products people just get."*
+  - Hero sub example: *"We pull apart how Spotify, Airbnb and Revolut feel so simple — then help you do the same."*
+  - Trust line example: *"A way of looking at products through people, habits, and small design choices."*
+- **`src/components/site/FinalCTA.tsx`** — rewrite the closer to something like *"Good products feel obvious. They almost never start that way."*
+- **`src/content/watchContent.ts`** — rewrite each `description` (and a few titles that lean academic) into one warm sentence each. Examples:
+  - Spotify Product World → *"Why opening Spotify feels like the app already knows what you want."*
+  - Airbnb → *"The little wording and layout tricks that make a listing feel like a place, not a database row."*
+  - Revolut → *"Why moving money in Revolut feels powerful — and how that feeling is designed."*
+  - Head to Head → *"Two music apps, two completely different vibes. Here's why."*
+- **`src/content/useCases.ts`** — soften titles and details. e.g. *"Your product feels messy after growth"* → *"Things got messy as you grew"* with detail *"Features piled up faster than the logic behind them. We help it click again."*
+- **`src/content/services.ts`** — keep service names, rewrite `short` lines in plain English.
+- **`src/content/pillars.ts`** — keep the five names (Goals / Rules / Feedback / Progress / Beliefs), rewrite each `oneLiner` and `definition` in everyday language.
+- **`src/components/site/FloatingTiles.tsx`** — rewrite the four `meta` lines (e.g. *"feels like it knows you"*, *"feels like a place"*, *"feels like control"*, *"feels like a search box"*).
+- **`src/components/site/Nav.tsx`** + Footer — CTA becomes *"Watch the videos"* (less brochure-y than "Watch the Library").
 
-**`/watch`:**
-- Hero featured = Spotify Product World video (most polished, sets the tone).
-- Filter pills: `All` · `Product Worlds` · `Deep Dives` · `Head to Head` (Breakdowns removed).
-- Search still works across title/brand/description.
-- Library shows all 9 items in a responsive grid.
-- Remove the "Premium breakdowns coming soon · Notify me" block entirely.
-- Keep the `FinalCTA` at the bottom.
+Pages I won't touch in this pass unless trivially affected: `Method.tsx`, `UseCases.tsx`, `WorkWithUs.tsx` long-form copy — flag them and ask if you want a second pass after seeing the home/watch tone.
 
-**`/` (Home) Watch preview:**
-- Tabs updated: `Product Worlds` / `Deep Dives` / `Head to Head`.
-- Remove FREE/LOCKED badges from preview cards.
-- "Featured" first card = Spotify Product World.
+## 5. Technical notes
 
-**Nav:**
-- CTA "Watch Free Breakdown" → "Watch the Spotify Breakdown" (links to `/watch` and could deep-link to open the modal — for v1 just route to `/watch`).
+- ffmpeg is available via `nix run nixpkgs#ffmpeg`. Single bash loop over the 5 MP4s, writes to `public/thumbs/`. Probed duration → seek to `duration*0.1`, `-frames:v 1`, `-q:v 3`.
+- Token aliasing strategy means existing `bg-sage`, `text-sage`, `border-sage/40` classes across ~12 files keep working without find-and-replace; they just render Polar Green instead of sage.
+- All color values stay in HSL CSS variables — no hardcoded hex in components.
+- No new dependencies. No backend changes. No routing changes.
 
-**Copy sweep:**
-- Replace every instance of "Breakdown(s)" with "Deep Dive(s)" where it refers to the audio category. Where "breakdown" is used generically (e.g. "Watch the Spotify breakdown" referring to a video), keep it — it's still natural English.
-- Specifically: filter labels, category labels, and the eyebrow on the Watch hero get the rename.
+## 6. Out of scope (call out, don't do)
 
-### 6. Files mapped to uploads
-
-The 4 uploaded files become:
-- `Spotify_s_Design_Philosophy.mp4` → Spotify Product World (hero featured)
-- `The_Secret_Blueprint_of_Airbnb.mp4` → Airbnb Product World
-- `Building_YouTube_Music.mp4` → YouTube Music Product World
-- `Spotify_vs_YouTube_Music.mp4` → Head to Head
-
-The 5 missing pieces (Revolut Product World + 4 audio Deep Dives) get entries in the content array with `mediaUrl` pointing to the expected path (`/videos/revolut-product-world.mp4`, `/audio/spotify-deep-dive.m4a`, etc.). When you upload them, drop them into `public/videos/` or `public/audio/` with the matching filename — no code change needed. Until then, those cards will render but the player will fail to load — so I'll **temporarily filter them out of the grid** with a `published: boolean` flag (default true; false for the 5 missing ones). Flip to true when files arrive.
-
-## Files touched
-
-- **New:** `src/components/site/MediaModal.tsx`
-- **Edited:**
-  - `src/content/watchContent.ts` — full rewrite around the new catalog
-  - `src/components/site/WatchCard.tsx` — video/audio variants, drop badges, click → modal
-  - `src/pages/Watch.tsx` — hero wired to modal, new filters, drop "Premium coming soon" block
-  - `src/pages/Home.tsx` — preview cards drop badges, tab labels updated, click → modal
-  - `src/components/site/Nav.tsx` — CTA copy
-  - Any other reference to `isFree` / `Breakdowns` (swept with `rg`)
-
-## Technical notes
-
-- `preload="metadata"` keeps the page fast — only headers load until play is hit.
-- Audio modal will look intentional, not like a bare `<audio>` tag floating on a page.
-- No analytics, no gating, no view tracking — pure landing-page-style library.
-- Future swap to cloud storage = change `mediaUrl` strings; nothing else.
-
-## Out of scope
-
-- Custom waveform visualization (audio gets a static decorative treatment instead).
-- Transcripts (can add later as a `transcript?: string` field).
-- Custom player chrome.
+- Light theme version of the Ant tokens (dark-only stays).
+- Replacing shadcn primitives (Dialog, Toast, etc.) with Ant React components — keeping shadcn, only restyling.
+- Long-form copy on `/method`, `/use-cases`, `/work-with-us` deep pages.
