@@ -1,127 +1,107 @@
+## Goal
 
-# World Builders Guide — v1 Website
+Restructure the Watch library around the real catalog: 4 products × (Product World video + Deep Dive audio) + 1 Head to Head video. Drop Free/Premium entirely. Build native players for both video and audio. Rename "Breakdowns" → "Deep Dives" everywhere.
 
-A premium, editorial marketing site for a product strategy studio. Dark-first, minimal, calm, high-trust. Five routes (Home + Watch + Use Cases + Method + Work With Us), fully responsive, desktop-first. All content static so it's easy to edit later; ready for video embeds, gating, and email capture in a future pass.
+## Final catalog
 
----
+| Product | Product World (video) | Deep Dive (audio podcast) |
+|---|---|---|
+| Airbnb | ✓ | ✓ |
+| Spotify | ✓ | ✓ |
+| YouTube Music | ✓ | ✓ |
+| Revolut | ✓ | ✓ |
+| Spotify vs YouTube Music | Head to Head video | — |
 
-## Design system
+Total: **9 pieces** (5 videos + 4 audio deep dives).
 
-**Theme:** Dark-first.
-- Background: near-black charcoal (`#0E0F0D` range) with a subtler "elevated" surface for cards.
-- Text: warm off-white for body, pure off-white for headings, muted warm-grey for meta.
-- Accent: muted sage / pistachio (`#B8C9A8` range) — used sparingly for CTAs, key underlines, hover states, and badges.
-- Borders: hairline, low-contrast warm grey for that gallery/editorial feel.
+## Categories (used in filters + cards)
 
-**Typography:**
-- Headings: a modern editorial serif-adjacent sans (e.g. Fraunces or Instrument Serif for display headlines, paired with Inter for UI). Large sizes, tight tracking, generous leading.
-- Body: Inter, comfortable measure (~65ch), warm-white at ~80% opacity.
-- Numbers / meta / labels: small caps tracking-wider for section eyebrows ("METHOD", "WATCH").
+- **Product Worlds** — 4 video breakdowns, one per product
+- **Deep Dives** — 4 audio podcasts (m4a, 2-speaker, NotebookLM-generated)
+- **Head to Head** — 1 video (Spotify vs YouTube Music)
 
-**Spacing & layout:** Generous whitespace, 1280px max content width, 8-pt spacing scale, sections separated by large vertical rhythm (96–160px desktop).
+"Breakdowns" is removed from the codebase entirely.
 
-**Motion (subtle only):**
-- Fade-in + slight rise on scroll (IntersectionObserver).
-- Hover lift on cards (translateY -2px + soft shadow + sage border tint).
-- Smooth tab crossfades on Watch.
-- Hero floating tiles drift gently (slow, low amplitude — never gimmicky).
+## Approach
 
-**Iconography:** Lucide, thin stroke.
+### 1. Content model
+Update `WatchItem` type:
+- Drop `isFree`.
+- Add `mediaType: "video" | "audio"`.
+- Add required `mediaUrl: string` (replaces the optional `videoUrl`).
+- Rename category `"Breakdowns"` → `"Deep Dives"`.
+- Keep `variant` for the abstract thumbnail look (audio cards get a distinct visual treatment — see below).
 
-**No stock photos.** All visuals are abstract: product diagrams, card grids, mono-line illustrations, and CSS-rendered "product world" tiles.
+### 2. Hosting
+- Videos → `public/videos/*.mp4` (≤35MB each, totals ~150MB for 5 videos — acceptable for v1).
+- Audio → `public/audio/*.m4a`.
+- Add a `<lov-link>` at the end so you can drop the rest of the files in via the chat upload when ready; the 4 already-uploaded MP4s get wired in this pass.
 
----
+### 3. Players (one component, two modes)
+Single `MediaModal` component (Radix Dialog, dark backdrop, sage focus rings, closes on Esc / backdrop / X, pauses on close).
 
-## Site structure
+- **Video mode:** native `<video controls preload="metadata" playsInline>` in a 16:9 frame.
+- **Audio mode:** abstract "podcast cover" visual on top (uses the card's `variant` thumbnail, larger), product name + "Deep Dive" label, then a native `<audio controls>` bar. Optional subtle waveform-style decoration (CSS only, no JS audio analysis).
 
-```
-/                  Home
-/watch             Content library
-/use-cases         Scenarios + deeper explanations
-/method            Interactive framework explainer
-/work-with-us      Services + contact form
-```
+### 4. Card visual differentiation
+Both card types share the same shape and grid, but signal medium clearly:
+- **Video cards:** existing thumbnail + a **play triangle** glyph in the corner badge area + duration ("7 min").
+- **Audio cards:** same abstract thumbnail with a tinted overlay + **headphones glyph** + "Deep Dive · 18 min" label. Slightly different accent treatment so the two feel related but distinct at a glance.
+- No FREE/PREMIUM badges anywhere.
+- All cards are clickable; clicking opens `MediaModal` in the right mode.
 
-**Sticky top nav** on every page: logo wordmark left ("World Builders Guide" in editorial serif), links center (Watch, Use Cases, Method, Work With Us), primary sage CTA right ("Watch Free Breakdown"). Mobile: slide-in sheet.
+### 5. Page structure changes
 
-**Footer** on every page: thin wordmark, link column, © line.
+**`/watch`:**
+- Hero featured = Spotify Product World video (most polished, sets the tone).
+- Filter pills: `All` · `Product Worlds` · `Deep Dives` · `Head to Head` (Breakdowns removed).
+- Search still works across title/brand/description.
+- Library shows all 9 items in a responsive grid.
+- Remove the "Premium breakdowns coming soon · Notify me" block entirely.
+- Keep the `FinalCTA` at the bottom.
 
----
+**`/` (Home) Watch preview:**
+- Tabs updated: `Product Worlds` / `Deep Dives` / `Head to Head`.
+- Remove FREE/LOCKED badges from preview cards.
+- "Featured" first card = Spotify Product World.
 
-## Homepage sections
+**Nav:**
+- CTA "Watch Free Breakdown" → "Watch the Spotify Breakdown" (links to `/watch` and could deep-link to open the modal — for v1 just route to `/watch`).
 
-1. **Hero** — Display headline "Build products that feel coherent." Subhead, two CTAs (sage primary + ghost secondary). Right side: an animated grid of 4 product-world tiles (Spotify, Airbnb, Revolut, YouTube Music) — abstract card mockups with product-name labels, gently floating with staggered offsets. Desktop: split layout. Mobile: stacked, tiles become a 2×2 grid.
-2. **Trust strip** — One-line statement + a row of 5–6 monochrome placeholder logo marks (rendered as text/SVG, not images) at low opacity.
-3. **Watch Preview** — Section title, three tabs (Product Worlds / Breakdowns / Head to Head), 6 cards in a 3-col grid. Each card: 16:9 abstract thumbnail, title, meta line ("12 min · Spotify"), duration chip, FREE or LOCKED badge. First card visually featured (spans 2 cols on desktop, sage outline, "FREE" badge). Tabs filter the grid with a smooth crossfade.
-4. **Use Cases** — Title + 6 cards in a 3×2 grid, each with a small lucide icon, the scenario line, and a short hover-revealed sub-line. Closing italic line below the grid.
-5. **Method** — "Products Are Worlds" title + subtitle. 5 vertical pillar cards (Goals, Rules, Feedback, Progress, Beliefs), each with a glyph, name, one-line description. On desktop: 5 columns with a faint connecting line; on mobile: stacked. CTA "Explore Method" → `/method`.
-6. **Work With Us** — Title + 3 service cards (Product Clarity Sprint, Feature Coherence Audit, Team Alignment Workshop). Each card has a number (01/02/03), name, one-sentence description, and a subtle hover lift. CTA "Start a Conversation" scrolls to the inline contact form (Name, Email, Company, "What are you building?" textarea, sage submit button, zod-validated, success toast — no backend yet, just client-side).
-7. **Final CTA** — Centered large headline "Great products feel obvious after they are built right." Two buttons.
-8. **Footer.**
+**Copy sweep:**
+- Replace every instance of "Breakdown(s)" with "Deep Dive(s)" where it refers to the audio category. Where "breakdown" is used generically (e.g. "Watch the Spotify breakdown" referring to a video), keep it — it's still natural English.
+- Specifically: filter labels, category labels, and the eyebrow on the Watch hero get the rename.
 
----
+### 6. Files mapped to uploads
 
-## Sub-pages
+The 4 uploaded files become:
+- `Spotify_s_Design_Philosophy.mp4` → Spotify Product World (hero featured)
+- `The_Secret_Blueprint_of_Airbnb.mp4` → Airbnb Product World
+- `Building_YouTube_Music.mp4` → YouTube Music Product World
+- `Spotify_vs_YouTube_Music.mp4` → Head to Head
 
-**`/watch`** — Netflix/Mobbin-inspired library.
-- Hero featured free breakdown (large 16:9 abstract thumbnail, title, description, "Watch free" CTA).
-- Sticky filter row: All / Product Worlds / Breakdowns / Head to Head + search input (filters client-side by title).
-- Responsive grid of ~12 content cards with lock icons on premium ones. Cards are visually inert in v1 (no playback) but structured as a typed array so videos can be wired later.
+The 5 missing pieces (Revolut Product World + 4 audio Deep Dives) get entries in the content array with `mediaUrl` pointing to the expected path (`/videos/revolut-product-world.mp4`, `/audio/spotify-deep-dive.m4a`, etc.). When you upload them, drop them into `public/videos/` or `public/audio/` with the matching filename — no code change needed. Until then, those cards will render but the player will fail to load — so I'll **temporarily filter them out of the grid** with a `published: boolean` flag (default true; false for the 5 missing ones). Flip to true when files arrive.
 
-**`/use-cases`** — Editorial long-form feel.
-- Intro headline + subhead.
-- 5 scenario blocks, each a two-column row: left = scenario title + 1-paragraph description + 3 bullet "what we do"; right = abstract diagram (CSS/SVG). Scenarios: Scaling startup with messy UX, Launching a second product line, Post-merger team alignment, Building a premium experience, Conference / event design as a world.
-- Bottom CTA strip → Work With Us.
+## Files touched
 
-**`/method`** — Interactive single-page explainer.
-- Hero: "Products Are Worlds" + intro paragraph.
-- Five expandable accordion sections (Goals, Rules, Feedback, Progress, Beliefs). Each opens to show: definition, 2–3 example questions teams should answer, and a small abstract diagram.
-- Below: "How we apply this" — 3-step process strip (Diagnose → Define → Align).
-- Bottom CTA → Work With Us.
-
-**`/work-with-us`** — Premium consulting landing.
-- Short hero: "Sharper product clarity, on demand."
-- Three detailed service cards (expanded versions of homepage cards: deliverables list, timeline, who it's for).
-- Inline FAQ accordion (4–5 items).
-- Contact form (same component as home).
-- Trust line + footer.
-
----
-
-## Content & data shape
-
-All content lives in a single `src/content/` folder so it's trivially editable later:
-- `watchContent.ts` — array of `{ id, title, category, duration, isFree, description, thumbnailVariant }`.
-- `useCases.ts`, `methodPillars.ts`, `services.ts`, `scenarios.ts`.
-
-Cards read from these arrays — adding new entries = one object. Thumbnails are CSS-generated variants (4–5 abstract patterns selected by `thumbnailVariant`), so no image assets needed for v1 and they look intentional and consistent.
-
----
-
-## Future-ready hooks (built in, dormant in v1)
-
-- Watch cards accept an optional `videoUrl` — when present, click opens a modal with a YouTube embed (modal component built but unused in v1).
-- `isFree: false` cards already render a lock badge and a hover state hinting at gated content.
-- Contact form is wrapped in a single `submitContact()` function — swap the in-memory handler for a Lovable Cloud insert later without touching the form.
-- An `<EmailCapture />` component is built and placed in the footer area, validating with zod and currently showing a "Thanks" toast — wire to a table later.
-
----
+- **New:** `src/components/site/MediaModal.tsx`
+- **Edited:**
+  - `src/content/watchContent.ts` — full rewrite around the new catalog
+  - `src/components/site/WatchCard.tsx` — video/audio variants, drop badges, click → modal
+  - `src/pages/Watch.tsx` — hero wired to modal, new filters, drop "Premium coming soon" block
+  - `src/pages/Home.tsx` — preview cards drop badges, tab labels updated, click → modal
+  - `src/components/site/Nav.tsx` — CTA copy
+  - Any other reference to `isFree` / `Breakdowns` (swept with `rg`)
 
 ## Technical notes
 
-- React Router routes added in `App.tsx` for the 4 new pages.
-- Design tokens defined as HSL CSS variables in `index.css`; Tailwind config extended with `bg-surface`, `bg-elevated`, `text-ink`, `text-ink-muted`, `border-hairline`, `accent-sage` semantic tokens. No hard-coded colors in components.
-- Fonts loaded via Google Fonts `<link>` in `index.html` (Fraunces + Inter).
-- Reusable components: `Nav`, `Footer`, `SectionEyebrow`, `WatchCard`, `UseCaseCard`, `PillarCard`, `ServiceCard`, `ContactForm`, `FloatingTiles` (hero animation), `RevealOnScroll` wrapper.
-- Form validation with zod; toasts via existing sonner.
-- No backend in v1 (per scope choice). Lovable Cloud can be enabled later for form storage + email capture without restructuring.
-- Accessibility: semantic landmarks, focus rings in sage, keyboard-navigable tabs/accordions (radix primitives already in repo), reduced-motion respected for floating tiles and reveals.
+- `preload="metadata"` keeps the page fast — only headers load until play is hit.
+- Audio modal will look intentional, not like a bare `<audio>` tag floating on a page.
+- No analytics, no gating, no view tracking — pure landing-page-style library.
+- Future swap to cloud storage = change `mediaUrl` strings; nothing else.
 
----
+## Out of scope
 
-## Out of scope for v1
-
-- Real video playback / YouTube embeds wired to cards.
-- Authentication or paid gating logic.
-- Backend persistence for contact form / email capture.
-- CMS UI (content edited in code for now, structured to be portable to a CMS later).
+- Custom waveform visualization (audio gets a static decorative treatment instead).
+- Transcripts (can add later as a `transcript?: string` field).
+- Custom player chrome.

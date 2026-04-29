@@ -16,7 +16,7 @@ export const FinalCTA = ({ className = "" }: Props) => (
           to="/watch"
           className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
         >
-          Watch Free Breakdown <ArrowRight size={16} />
+          Watch the Library <ArrowRight size={16} />
         </Link>
         <Link
           to="/work-with-us"

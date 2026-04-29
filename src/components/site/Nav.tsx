@@ -59,7 +59,7 @@ export const Nav = () => {
             to="/watch"
             className="inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
           >
-            Watch Free Breakdown
+            Watch the Library
           </Link>
         </div>
 
@@ -90,7 +90,7 @@ export const Nav = () => {
               to="/watch"
               className="mt-2 inline-flex w-fit items-center rounded-full bg-sage px-4 py-2 text-sm font-medium text-background"
             >
-              Watch Free Breakdown
+              Watch the Library
             </Link>
           </div>
         </div>

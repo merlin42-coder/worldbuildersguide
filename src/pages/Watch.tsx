@@ -1,23 +1,27 @@
 import { useMemo, useState } from "react";
-import { Search, Play, Lock } from "lucide-react";
+import { Search, Play } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { WatchCard } from "@/components/site/WatchCard";
 import { AbstractThumb } from "@/components/site/AbstractThumb";
 import { FinalCTA } from "@/components/site/FinalCTA";
-import { watchContent, type WatchCategory } from "@/content/watchContent";
+import { MediaModal } from "@/components/site/MediaModal";
+import { publishedWatchContent, type WatchCategory, type WatchItem } from "@/content/watchContent";
 
-const filters: ("All" | WatchCategory)[] = ["All", "Product Worlds", "Breakdowns", "Head to Head"];
+const filters: ("All" | WatchCategory)[] = ["All", "Product Worlds", "Deep Dives", "Head to Head"];
 
 const Watch = () => {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [query, setQuery] = useState("");
+  const [active, setActive] = useState<WatchItem | null>(null);
 
-  const featured = watchContent.find((w) => w.isFree)!;
+  const featured =
+    publishedWatchContent.find((w) => w.id === "spotify-product-world") ??
+    publishedWatchContent[0];
 
   const items = useMemo(() => {
-    return watchContent
+    return publishedWatchContent
       .filter((w) => w.id !== featured.id)
       .filter((w) => (filter === "All" ? true : w.category === filter))
       .filter((w) =>
@@ -35,21 +39,22 @@ const Watch = () => {
         <section className="pt-12 md:pt-20 pb-16 md:pb-24">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-6">Watch · Featured Free Breakdown</div>
+              <div className="eyebrow mb-6">Watch · Featured</div>
             </Reveal>
             <div className="grid lg:grid-cols-12 gap-10 items-center">
               <Reveal className="lg:col-span-7">
-                <div className="relative">
+                <button
+                  onClick={() => setActive(featured)}
+                  className="relative block w-full group"
+                  aria-label={`Play ${featured.title}`}
+                >
                   <AbstractThumb variant={featured.variant} />
-                  <button className="absolute inset-0 flex items-center justify-center group">
+                  <span className="absolute inset-0 flex items-center justify-center">
                     <span className="w-16 h-16 rounded-full bg-sage text-background flex items-center justify-center group-hover:scale-105 transition-transform">
                       <Play size={22} className="ml-1" />
                     </span>
-                  </button>
-                  <span className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] bg-sage text-background px-2 py-0.5 rounded-sm font-medium">
-                    Free
                   </span>
-                </div>
+                </button>
               </Reveal>
               <Reveal delay={120} className="lg:col-span-5">
                 <div className="eyebrow text-ink-subtle">{featured.category}</div>
@@ -62,8 +67,11 @@ const Watch = () => {
                   <span className="w-1 h-1 rounded-full bg-ink-subtle" />
                   <span>{featured.duration}</span>
                 </div>
-                <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity">
-                  <Play size={14} /> Watch free
+                <button
+                  onClick={() => setActive(featured)}
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage px-5 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity"
+                >
+                  <Play size={14} /> Watch now
                 </button>
               </Reveal>
             </div>
@@ -94,7 +102,7 @@ const Watch = () => {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search breakdowns"
+                placeholder="Search the library"
                 maxLength={120}
                 className="w-full bg-elevated border border-hairline rounded-full pl-9 pr-4 py-2 text-sm text-ink placeholder:text-ink-subtle focus:border-sage outline-none transition-colors"
               />
@@ -107,40 +115,24 @@ const Watch = () => {
           <div className="container-wbg">
             {items.length === 0 ? (
               <p className="text-ink-muted text-center py-20">
-                No breakdowns match that search yet.
+                Nothing matches that search yet.
               </p>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {items.map((it, i) => (
                   <Reveal key={it.id} delay={(i % 3) * 60}>
-                    <WatchCard item={it} />
+                    <WatchCard item={it} onPlay={setActive} />
                   </Reveal>
                 ))}
               </div>
             )}
-
-            <Reveal>
-              <div className="mt-20 border border-hairline bg-elevated p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 justify-between">
-                <div className="flex items-start gap-4">
-                  <Lock size={20} className="text-sage mt-1" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="font-display text-2xl text-ink">Premium breakdowns coming soon.</h3>
-                    <p className="mt-2 text-sm text-ink-muted max-w-xl">
-                      Deeper analyses and head-to-heads, gated to a small audience of founders and product leaders.
-                    </p>
-                  </div>
-                </div>
-                <button className="rounded-full border border-hairline-strong px-5 py-3 text-sm text-ink hover:border-sage transition-colors">
-                  Notify me
-                </button>
-              </div>
-            </Reveal>
           </div>
         </section>
 
         <FinalCTA />
       </main>
       <Footer />
+      <MediaModal item={active} onClose={() => setActive(null)} />
     </>
   );
 };
