@@ -13,12 +13,28 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ["Fraunces", "Times New Roman", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          muted: "hsl(var(--ink-muted))",
+          subtle: "hsl(var(--ink-subtle))",
+        },
+        elevated: "hsl(var(--elevated))",
+        "elevated-2": "hsl(var(--elevated-2))",
+        hairline: "hsl(var(--hairline))",
+        sage: {
+          DEFAULT: "hsl(var(--accent-sage))",
+          deep: "hsl(var(--accent-sage-deep))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
