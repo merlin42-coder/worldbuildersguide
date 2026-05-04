@@ -16,7 +16,7 @@ import { services } from "@/content/services";
 
 const tabs: WatchCategory[] = ["Product Worlds", "Deep Dives", "Head to Head"];
 
-const STUDIED_PRODUCTS = ["SPOTIFY", "AIRBNB", "REVOLUT", "YOUTUBE MUSIC"];
+const STUDIED_PRODUCTS = ["SPOTIFY", "AIRBNB", "REVOLUT", "YOUTUBE MUSIC", "WISE"];
 
 const Home = () => {
   const [tab, setTab] = useState<WatchCategory>("Product Worlds");
