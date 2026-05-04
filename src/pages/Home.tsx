@@ -16,7 +16,7 @@ import { services } from "@/content/services";
 
 const tabs: WatchCategory[] = ["Product Worlds", "Deep Dives", "Head to Head"];
 
-const TRUST_LOGOS = ["FOUNDERS·FUND", "RADIX", "NORTHWAVE", "MERIDIAN", "SUNDIAL", "OAKHAUS"];
+const STUDIED_PRODUCTS = ["SPOTIFY", "AIRBNB", "REVOLUT", "YOUTUBE MUSIC"];
 
 const Home = () => {
   const [tab, setTab] = useState<WatchCategory>("Product Worlds");
@@ -79,11 +79,11 @@ const Home = () => {
           <div className="container-wbg py-14">
             <Reveal>
               <p className="text-center text-sm md:text-base text-ink-muted">
-                A way of looking at products through people, habits and small design choices.
+                Products we've pulled apart so far
               </p>
             </Reveal>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 opacity-60">
-              {TRUST_LOGOS.map((l) => (
+              {STUDIED_PRODUCTS.map((l) => (
                 <span key={l} className="text-xs md:text-sm tracking-[0.22em] text-ink-muted font-medium">
                   {l}
                 </span>
