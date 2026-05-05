@@ -1,3 +1,5 @@
+import { mediaUrl } from "@/lib/media";
+
 export type WatchCategory = "Product Worlds" | "Deep Dives" | "Head to Head";
 
 export interface WatchItem {
