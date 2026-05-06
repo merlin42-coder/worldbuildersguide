@@ -2,7 +2,6 @@ import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { ContactForm } from "@/components/site/ContactForm";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { services } from "@/content/services";
 import {
@@ -142,15 +141,26 @@ const WorkWithUs = () => {
             <Reveal className="lg:col-span-5">
               <div className="eyebrow mb-4">Contact</div>
               <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                Tell us what you're building.
+                Tell me what world you're building.
               </h2>
               <p className="mt-5 text-ink-muted max-w-md">
-                Short and direct is best. We respond within two business days.
+                Short and direct is best. Early-stage ideas are welcome. Rough thoughts are fine.
               </p>
             </Reveal>
             <div className="lg:col-span-7">
               <Reveal delay={120}>
-                <ContactForm />
+                <div className="border-t border-hairline pt-10">
+                  <div className="eyebrow mb-3">Email me directly</div>
+                  <a
+                    href="mailto:hi@gergelygurmai.me"
+                    className="font-display text-3xl md:text-4xl text-ink hover:text-sage transition-colors break-all"
+                  >
+                    hi@gergelygurmai.me
+                  </a>
+                  <p className="mt-8 text-sm text-ink-subtle">
+                    I usually reply within 1–2 business days.
+                  </p>
+                </div>
               </Reveal>
             </div>
           </div>
