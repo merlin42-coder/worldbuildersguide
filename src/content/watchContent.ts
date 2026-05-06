@@ -71,6 +71,7 @@ export const watchContent: WatchItem[] = [
     variant: 4,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/wise-product-world.mp4"),
+    thumbnailUrl: "/thumbs/wise-product-world.jpg",
     published: true,
   },
 
@@ -128,6 +129,7 @@ export const watchContent: WatchItem[] = [
     variant: 2,
     mediaType: "audio",
     mediaUrl: mediaUrl("audio/revolut-deep-dive.m4a"),
+    thumbnailUrl: "/thumbs/revolut-product-world.jpg",
     published: true,
   },
   {
@@ -141,6 +143,7 @@ export const watchContent: WatchItem[] = [
     variant: 4,
     mediaType: "audio",
     mediaUrl: mediaUrl("audio/wise-deep-dive.m4a"),
+    thumbnailUrl: "/thumbs/wise-product-world.jpg",
     published: true,
   },
 
@@ -170,6 +173,7 @@ export const watchContent: WatchItem[] = [
     variant: 5,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/revolut-vs-wise.mp4"),
+    thumbnailUrl: "/thumbs/revolut-vs-wise.jpg",
     published: true,
   },
 ];
