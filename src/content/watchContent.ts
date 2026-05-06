@@ -61,17 +61,16 @@ export const watchContent: WatchItem[] = [
     published: true,
   },
   {
-    id: "revolut-product-world",
-    title: "Inside Revolut",
+    id: "wise-product-world",
+    title: "Inside Wise",
     category: "Product Worlds",
-    brand: "Revolut",
+    brand: "Wise",
     duration: "7 min",
     description:
-      "Why moving money in Revolut feels powerful — and how that feeling is designed on purpose.",
-    variant: 2,
+      "How Wise turns sending money abroad — usually a wall of fees and fine print — into something that feels honest and obvious.",
+    variant: 4,
     mediaType: "video",
-    mediaUrl: mediaUrl("videos/revolut-product-world.mp4"),
-    thumbnailUrl: "/thumbs/revolut-product-world.jpg",
+    mediaUrl: mediaUrl("videos/wise-product-world.mp4"),
     published: true,
   },
 
@@ -129,8 +128,20 @@ export const watchContent: WatchItem[] = [
     variant: 2,
     mediaType: "audio",
     mediaUrl: mediaUrl("audio/revolut-deep-dive.m4a"),
-    thumbnailUrl: "/thumbs/revolut-product-world.jpg",
-    published: false,
+    published: true,
+  },
+  {
+    id: "wise-deep-dive",
+    title: "Wise, deep dive",
+    category: "Deep Dives",
+    brand: "Wise",
+    duration: "18 min",
+    description:
+      "Why Wise chose radical clarity over flashy features — and how that shapes every screen.",
+    variant: 4,
+    mediaType: "audio",
+    mediaUrl: mediaUrl("audio/wise-deep-dive.m4a"),
+    published: true,
   },
 
   // ============ HEAD TO HEAD (video) ============
@@ -146,6 +157,19 @@ export const watchContent: WatchItem[] = [
     mediaType: "video",
     mediaUrl: mediaUrl("videos/spotify-vs-youtube-music.mp4"),
     thumbnailUrl: "/thumbs/spotify-vs-youtube-music.jpg",
+    published: true,
+  },
+  {
+    id: "revolut-vs-wise",
+    title: "Revolut vs Wise",
+    category: "Head to Head",
+    brand: "Revolut · Wise",
+    duration: "8 min",
+    description:
+      "One wants to be your whole money OS. The other just wants to send a transfer abroad without surprises. Two very different bets on what a money app should feel like.",
+    variant: 5,
+    mediaType: "video",
+    mediaUrl: mediaUrl("videos/revolut-vs-wise.mp4"),
     published: true,
   },
 ];
