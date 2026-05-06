@@ -275,15 +275,26 @@ const Home = () => {
             <div className="mt-20 grid lg:grid-cols-12 gap-12">
               <Reveal className="lg:col-span-5">
                 <h3 className="font-display text-3xl text-ink leading-tight">
-                  Tell us what you're building.
+                  Tell me what world you're building.
                 </h3>
                 <p className="mt-4 text-ink-muted">
-                  Short and to the point is best. We get back within two business days.
+                  Short and direct is best. Early-stage ideas are welcome. Rough thoughts are fine.
                 </p>
               </Reveal>
               <div className="lg:col-span-7">
                 <Reveal delay={120}>
-                  <ContactForm />
+                  <div className="border-t border-hairline pt-10">
+                    <div className="eyebrow mb-3">Email me directly</div>
+                    <a
+                      href="mailto:hi@gergelygurmai.me"
+                      className="font-display text-3xl md:text-4xl text-ink hover:text-sage transition-colors break-all"
+                    >
+                      hi@gergelygurmai.me
+                    </a>
+                    <p className="mt-8 text-sm text-ink-subtle">
+                      I usually reply within 1–2 business days.
+                    </p>
+                  </div>
                 </Reveal>
               </div>
             </div>
