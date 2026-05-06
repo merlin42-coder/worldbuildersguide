@@ -6,7 +6,6 @@ import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { FloatingTiles } from "@/components/site/FloatingTiles";
 import { WatchCard } from "@/components/site/WatchCard";
-import { ContactForm } from "@/components/site/ContactForm";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { MediaModal } from "@/components/site/MediaModal";
 import { publishedWatchContent, type WatchCategory, type WatchItem } from "@/content/watchContent";
