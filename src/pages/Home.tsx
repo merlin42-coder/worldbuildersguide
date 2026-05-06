@@ -41,7 +41,7 @@ const Home = () => {
           <div className="container-wbg pt-16 md:pt-24 pb-20 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7">
               <Reveal>
-                <div className="eyebrow mb-6">A product strategy studio</div>
+                <div className="eyebrow mb-6">A world-first product strategy studio</div>
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="font-display text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] text-ink tracking-tight">
@@ -50,18 +50,24 @@ const Home = () => {
               </Reveal>
               <Reveal delay={180}>
                 <p className="mt-7 max-w-xl text-lg text-ink-muted leading-relaxed">
-                  We pull apart how Spotify, Airbnb and Revolut feel so simple — then help you do the same with yours.
+                  We break down how Spotify, Airbnb and Revolut actually work — then help you build the same clarity into your product.
+                </p>
+                <p className="mt-3 max-w-xl text-lg text-ink-muted leading-relaxed">
+                  Using a simple document that defines how your product world behaves before you design anything.
                 </p>
               </Reveal>
               <Reveal delay={260}>
                 <div className="mt-10 flex flex-wrap gap-4">
                   <Link to="/watch" className="btn-primary">
-                    Watch the videos <ArrowRight size={16} />
+                    Watch breakdowns <ArrowRight size={16} />
                   </Link>
                   <Link to="/work-with-us" className="btn-default">
-                    Work with us
+                    Build your world
                   </Link>
                 </div>
+                <p className="mt-4 text-sm text-ink-subtle">
+                  When the world is clear, product decisions become obvious.
+                </p>
               </Reveal>
             </div>
 
