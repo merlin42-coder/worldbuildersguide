@@ -1,56 +1,36 @@
-## Why your upload is failing
+# Sync the Watch library with cloud storage
 
-- Lovable chat has a hard **20 MB per file** limit. Your earlier uploads (the smaller MP4s and audio) slipped under it; 40 MB files won't.
-- Even if we could squeeze them in, dropping 40 MB files into `public/videos/` makes every page load ship more bytes and slows your build. `public/` is the wrong home for heavy media.
+The current files in the `media` bucket are:
 
-## The fix: use Lovable Cloud Storage
+**videos/**: airbnb-product-world, revolut-vs-wise, spotify-product-world, spotify-vs-youtube-music, wise-product-world, youtube-music-product-world
+**audio/**: airbnb-deep-dive, revolut-deep-dive, spotify-deep-dive, wise-deep-dive, youtube-music-deep-dive
 
-You already have Lovable Cloud enabled. We'll create a public storage bucket, you upload the big files straight to it from the Cloud → Storage screen (no 20 MB chat limit there), and the site loads them by URL.
+I'll update `src/content/watchContent.ts` so the library matches.
 
-### Steps
+## Changes to the library
 
-1. **Create a public storage bucket** called `media` (via a migration so RLS is set correctly):
-   - Bucket is public-read so `<video>` / `<audio>` tags can stream it without auth.
-   - Write access stays restricted (only you via the Cloud dashboard).
+**Add — Product Worlds**
 
-2. **You upload the files** in Cloud → Storage → `media` bucket. Suggested folder layout matching the current filenames:
-   ```text
-   media/
-     videos/
-       spotify-product-world.mp4
-       airbnb-product-world.mp4
-       youtube-music-product-world.mp4
-       revolut-product-world.mp4
-       spotify-vs-youtube-music.mp4
-     audio/
-       spotify-deep-dive.m4a
-       airbnb-deep-dive.m4a
-       youtube-music-deep-dive.m4a
-       revolut-deep-dive.m4a
-     thumbs/
-       *.jpg   (optional — can keep these in /public since they're small)
-   ```
-   Storage has no 20 MB cap from the dashboard, so 40 MB files are fine.
+- **Inside Wise** → `videos/wise-product-world.mp4`. Variant 4. Copy in the same voice as the other Product Worlds (about Wise's clarity around international transfers and FX).
 
-3. **Switch `src/content/watchContent.ts`** so each `mediaUrl` (and optionally `thumbnailUrl`) points at the storage public URL instead of `/videos/...`. Pattern:
-   ```text
-   https://zjephlkiesyzsgwtlbrv.supabase.co/storage/v1/object/public/media/videos/<file>.mp4
-   ```
-   I'll add a tiny helper (e.g. `mediaUrl("videos/spotify-product-world.mp4")`) so the base URL isn't repeated on every entry and is easy to change later.
+**Add — Deep Dives**
 
-4. **Delete the now-unused large files from `public/videos/`** so the repo and build stay light. Thumbnails in `public/thumbs/` can stay — they're tiny.
+- **Wise, deep dive** → `audio/wise-deep-dive.m4a`. Variant 4.
 
-5. **No code changes needed in `MediaModal` / `WatchCard` / `Watch.tsx`** — they already render whatever URL is in the content file. This is purely a content + bucket change.
+**Add — Head to Head**
 
-### What you'll do vs. what I'll do
+- **Revolut vs Wise** → `videos/revolut-vs-wise.mp4`. Variant 5. Description framing the contrast between Revolut's "all-in-one money OS" feel and Wise's "send money abroad, no surprises" feel.
 
-- I'll: create the bucket + policies, add the URL helper, rewrite `watchContent.ts` to use storage URLs, remove the big files from `public/videos/`.
-- You'll: open Cloud → Storage → `media` after I create it, drag the 40 MB files into the matching folders, then refresh the site.
+**Publish**
 
-### Out of scope for this pass
+- Flip `revolut-deep-dive` from `published: false` to `true`.
 
-- Signed/private URLs (not needed since the watch page is public anyway).
-- A custom upload UI inside the app — the Cloud dashboard is enough for occasional uploads.
-- Re-encoding the files smaller. If you want, I can add an ffmpeg pass later to produce a lighter web-optimized version, but it's not required.
+## Thumbnails
 
-Approve this and I'll set up the bucket and rewire the content.
+The new entries will fall back to the existing CSS-rendered `AbstractThumb` (variants 4 and 5) since there are no images for Wise / Revolut-vs-Wise in `public/thumbs/` yet. Same pattern as the unpublished Revolut deep dive used. If you want bespoke JPGs, drop them into `public/thumbs/` and I'll wire them up.
+
+## Files touched
+
+- `src/content/watchContent.ts` — add 3 new items, publish 1, remove 1.
+
+No other code changes needed — `Watch.tsx`, `WatchCard`, and `MediaModal` already render whatever is in `publishedWatchContent`.
