@@ -10,8 +10,8 @@ export interface UseCase {
 export const useCases: UseCase[] = [
   {
     icon: Layers,
-    title: "Things got messy as you grew",
-    detail: "Features piled up faster than the logic behind them. We help it click again.",
+    title: "Things got messy as you scaled",
+    detail: "Usually it's not a roadmap problem. No one shares the same picture of the product.",
   },
   {
     icon: Users,
