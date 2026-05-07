@@ -14,7 +14,7 @@ export const Footer = () => {
         </div>
 
         <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-          <Link to="/watch" className="text-ink-muted hover:text-ink transition-colors">Watch</Link>
+          <Link to="/watch" className="text-ink-muted hover:text-ink transition-colors">PRODUCT WORLD</Link>
           <Link to="/use-cases" className="text-ink-muted hover:text-ink transition-colors">Use Cases</Link>
           <Link to="/method" className="text-ink-muted hover:text-ink transition-colors">Method</Link>
           <Link to="/work-with-us" className="text-ink-muted hover:text-ink transition-colors">Build your world</Link>
