@@ -25,7 +25,7 @@ export const watchContent: WatchItem[] = [
     brand: "Spotify",
     duration: "7 min",
     description:
-      "Why opening Spotify feels like the app already knows what you want.",
+      "Why Spotify feels like it already knows what you want",
     variant: 1,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/spotify-product-world.mp4"),
