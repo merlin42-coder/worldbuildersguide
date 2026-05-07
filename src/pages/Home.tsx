@@ -196,12 +196,12 @@ const Home = () => {
             <div className="grid lg:grid-cols-12 gap-10">
               <Reveal className="lg:col-span-7">
                 <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                  Products are little worlds
+                  Every product is a world
                 </h2>
               </Reveal>
               <Reveal delay={100} className="lg:col-span-5">
                 <p className="text-ink-muted text-lg leading-relaxed">
-                  Every product quietly teaches you how it works. The good ones make that feel obvious. The bad ones make you guess.
+                  Every product quietly teaches you how it works.{"\n"}The best ones make it feel obvious. The rest make you guess
                 </p>
               </Reveal>
             </div>
