@@ -155,7 +155,7 @@ const Home = () => {
         <section className="hairline-top py-28 md:py-40">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-4">When this helps</div>
+              <div className="eyebrow mb-4">USE CASES</div>
             </Reveal>
             <Reveal>
               <h2 className="font-display text-4xl md:text-5xl text-ink max-w-3xl leading-tight">
