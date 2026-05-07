@@ -42,7 +42,7 @@ const WorkWithUs = () => {
         <section className="pt-16 md:pt-28 pb-16 md:pb-24">
           <div className="container-wbg max-w-4xl">
             <Reveal>
-              <div className="eyebrow mb-6">Work With Us</div>
+              <div className="eyebrow mb-6">BUILD YOUR WORLD</div>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="font-display text-5xl md:text-6xl text-ink leading-[1.05]">

@@ -6,7 +6,7 @@ const links = [
   { to: "/watch", label: "Watch" },
   { to: "/use-cases", label: "Use Cases" },
   { to: "/method", label: "Method" },
-  { to: "/work-with-us", label: "Work With Us" },
+  { to: "/work-with-us", label: "Build your world" },
 ];
 
 export const Nav = () => {
@@ -58,7 +58,7 @@ export const Nav = () => {
 
         <div className="hidden md:block">
           <Link to="/watch" className="btn-primary">
-            Watch the videos
+            Watch breakdowns
           </Link>
         </div>
 
@@ -86,7 +86,7 @@ export const Nav = () => {
               </NavLink>
             ))}
             <Link to="/watch" className="btn-primary mt-2 w-fit">
-              Watch the videos
+              Watch breakdowns
             </Link>
           </div>
         </div>

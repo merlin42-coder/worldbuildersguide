@@ -247,7 +247,7 @@ const Home = () => {
             <div className="grid lg:grid-cols-12 gap-10">
               <Reveal className="lg:col-span-7">
                 <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                  Work with us
+                  Build your world
                 </h2>
               </Reveal>
               <Reveal delay={100} className="lg:col-span-5">
