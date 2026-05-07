@@ -10,7 +10,7 @@ export const pillars: Pillar[] = [
   {
     number: "01",
     name: "Goals",
-    oneLiner: "What people are actually here to do",
+    oneLiner: "What the product assumes",
     definition: "The thing the user is really trying to get done — not the button they tapped. Good products are built around the goal, not the screen.",
     questions: [
       "What is the user actually trying to do right now?",
