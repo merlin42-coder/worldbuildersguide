@@ -25,7 +25,7 @@ export const watchContent: WatchItem[] = [
     brand: "Spotify",
     duration: "7 min",
     description:
-      "Why opening Spotify feels like the app already knows what you want.",
+      "Why Spotify feels like it already knows what you want",
     variant: 1,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/spotify-product-world.mp4"),
@@ -39,7 +39,7 @@ export const watchContent: WatchItem[] = [
     brand: "Airbnb",
     duration: "7 min",
     description:
-      "The little wording and layout choices that make a listing feel like a place, not a database row.",
+      "Why Airbnb listings feel like places, not database rows",
     variant: 4,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/airbnb-product-world.mp4"),
@@ -53,7 +53,7 @@ export const watchContent: WatchItem[] = [
     brand: "YouTube Music",
     duration: "6 min",
     description:
-      "What happens when a music app is built like a search box instead of a place to hang out.",
+      "Why YouTube Music feels like a search engine, not a place",
     variant: 3,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/youtube-music-product-world.mp4"),
@@ -67,7 +67,7 @@ export const watchContent: WatchItem[] = [
     brand: "Wise",
     duration: "7 min",
     description:
-      "How Wise turns sending money abroad — usually a wall of fees and fine print — into something that feels honest and obvious.",
+      "Why Wise feels predictable when sending money abroad",
     variant: 4,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/wise-product-world.mp4"),
@@ -81,7 +81,7 @@ export const watchContent: WatchItem[] = [
     brand: "Revolut",
     duration: "7 min",
     description:
-      "How Revolut makes complex money stuff — currencies, cards, transfers — feel obvious and in your control.",
+      "Why Revolut makes complex money feel under control",
     variant: 2,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/revolut-product-world.mp4"),
