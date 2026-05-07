@@ -93,17 +93,18 @@ const Home = () => {
         <section className="py-28 md:py-40">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-4">Watch</div>
+              <div className="eyebrow mb-4">BREAKDOWNS</div>
             </Reveal>
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <Reveal>
                 <h2 className="font-display text-4xl md:text-5xl text-ink max-w-2xl leading-tight">
-                  Watch how products tick
+                  How product worlds<br />build coherence
                 </h2>
               </Reveal>
               <Reveal delay={100}>
                 <p className="text-ink-muted max-w-md">
-                  Short videos that pull apart why some apps feel effortless — and others feel like a mess.
+                  Some products feel effortless, others feel off.<br />
+                  You feel it before you can explain it.
                 </p>
               </Reveal>
             </div>
