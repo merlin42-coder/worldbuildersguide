@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { to: "/watch", label: "Watch" },
+  { to: "/watch", label: "PRODUCT WORLD" },
   { to: "/use-cases", label: "Use Cases" },
   { to: "/method", label: "Method" },
   { to: "/work-with-us", label: "Build your world" },
