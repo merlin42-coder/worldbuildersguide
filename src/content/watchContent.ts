@@ -81,7 +81,7 @@ export const watchContent: WatchItem[] = [
     brand: "Revolut",
     duration: "7 min",
     description:
-      "How Revolut makes complex money stuff — currencies, cards, transfers — feel obvious and in your control.",
+      "Why Revolut makes complex money feel under control",
     variant: 2,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/revolut-product-world.mp4"),
