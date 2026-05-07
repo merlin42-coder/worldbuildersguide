@@ -67,7 +67,7 @@ export const watchContent: WatchItem[] = [
     brand: "Wise",
     duration: "7 min",
     description:
-      "How Wise turns sending money abroad — usually a wall of fees and fine print — into something that feels honest and obvious.",
+      "Why Wise feels predictable when sending money abroad",
     variant: 4,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/wise-product-world.mp4"),
