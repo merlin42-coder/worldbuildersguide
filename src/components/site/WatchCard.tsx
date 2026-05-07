@@ -59,11 +59,6 @@ export const WatchCard = ({ item, featured = false, onPlay }: Props) => {
           </div>
         </div>
 
-        <div className="absolute top-3 left-3">
-          <span className={isAudio ? "tag tag-accent backdrop-blur" : "tag backdrop-blur"}>
-            {isAudio ? "Deep Dive" : item.category === "Head to Head" ? "Head to Head" : "PRODUCT WORLD"}
-          </span>
-        </div>
         <div className="absolute top-3 right-3">
           <span className="tag backdrop-blur">{item.duration}</span>
         </div>
