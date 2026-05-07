@@ -95,7 +95,7 @@ const Home = () => {
             <Reveal>
               <div className="eyebrow mb-4">Watch</div>
             </Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <Reveal>
                 <h2 className="font-display text-4xl md:text-5xl text-ink max-w-2xl leading-tight">
                   Watch how products tick
