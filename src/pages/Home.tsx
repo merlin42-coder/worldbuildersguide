@@ -21,16 +21,8 @@ const Home = () => {
   const [tab, setTab] = useState<WatchCategory>("Product Worlds");
   const [active, setActive] = useState<WatchItem | null>(null);
   const visible = publishedWatchContent.filter((w) => w.category === tab);
-  // Pad from other categories if a tab is light, so the grid stays full.
-  const padded = [...visible];
-  if (padded.length < 4) {
-    for (const w of publishedWatchContent) {
-      if (padded.length >= 4) break;
-      if (!padded.find((p) => p.id === w.id)) padded.push(w);
-    }
-  }
-  const featured = padded[0];
-  const rest = padded.slice(1, 6);
+  const featured = visible[0];
+  const rest = visible.slice(1, 6);
 
   return (
     <>
