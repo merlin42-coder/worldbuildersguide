@@ -181,7 +181,7 @@ const Home = () => {
 
             <Reveal delay={200}>
               <p className="mt-12 text-center italic text-ink-muted max-w-2xl mx-auto">
-                When a product grows without a shared picture of itself, friction quietly piles up.
+                When a product grows without a shared picture of itself, friction quietly builds.
               </p>
             </Reveal>
           </div>
