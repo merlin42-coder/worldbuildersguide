@@ -39,7 +39,7 @@ const Watch = () => {
         <section className="pt-12 md:pt-20 pb-16 md:pb-24">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-6">Watch · Featured</div>
+              <div className="eyebrow mb-6">PRODUCT WORLD · Featured</div>
             </Reveal>
             <div className="grid lg:grid-cols-12 gap-10 items-center">
               <Reveal className="lg:col-span-7">
