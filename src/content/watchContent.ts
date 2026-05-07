@@ -74,6 +74,20 @@ export const watchContent: WatchItem[] = [
     thumbnailUrl: "/thumbs/wise-product-world.jpg",
     published: true,
   },
+  {
+    id: "revolut-product-world",
+    title: "Inside Revolut",
+    category: "Product Worlds",
+    brand: "Revolut",
+    duration: "7 min",
+    description:
+      "How Revolut makes complex money stuff — currencies, cards, transfers — feel obvious and in your control.",
+    variant: 2,
+    mediaType: "video",
+    mediaUrl: mediaUrl("videos/revolut-product-world.mp4"),
+    thumbnailUrl: "/thumbs/revolut-product-world.jpg",
+    published: true,
+  },
 
   // ============ DEEP DIVES (audio) ============
   {
