@@ -242,7 +242,7 @@ const Home = () => {
         <section id="work" className="hairline-top py-28 md:py-40">
           <div className="container-wbg">
             <Reveal>
-              <div className="eyebrow mb-4">Work together</div>
+              <div className="eyebrow mb-4">BUILD YOUR WORLD</div>
             </Reveal>
             <div className="grid lg:grid-cols-12 gap-10">
               <Reveal className="lg:col-span-7">
