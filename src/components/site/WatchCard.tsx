@@ -67,7 +67,7 @@ export const WatchCard = ({ item, featured = false, onPlay }: Props) => {
       <div className="p-5 flex flex-col flex-1">
         <div className="eyebrow text-ink-subtle mb-2">{item.category}</div>
         <h3 className="font-display text-lg md:text-xl text-ink leading-snug">{item.title}</h3>
-        <p className="mt-2 text-sm text-ink-muted line-clamp-2">{item.description}</p>
+        
         <div className="mt-4 pt-4 border-t border-hairline text-xs text-ink-subtle">
           {item.brand}
         </div>
