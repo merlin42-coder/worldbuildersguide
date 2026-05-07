@@ -98,7 +98,7 @@ const Home = () => {
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <Reveal>
                 <h2 className="font-display text-4xl md:text-5xl text-ink max-w-2xl leading-tight">
-                  How product worlds<br />build coherence
+                  Why some products<br />feel right and others don’t
                 </h2>
               </Reveal>
               <Reveal delay={100}>
