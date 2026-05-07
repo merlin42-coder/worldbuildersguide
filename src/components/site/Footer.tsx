@@ -17,7 +17,7 @@ export const Footer = () => {
           <Link to="/watch" className="text-ink-muted hover:text-ink transition-colors">Watch</Link>
           <Link to="/use-cases" className="text-ink-muted hover:text-ink transition-colors">Use Cases</Link>
           <Link to="/method" className="text-ink-muted hover:text-ink transition-colors">Method</Link>
-          <Link to="/work-with-us" className="text-ink-muted hover:text-ink transition-colors">Work With Us</Link>
+          <Link to="/work-with-us" className="text-ink-muted hover:text-ink transition-colors">Build your world</Link>
         </nav>
       </div>
 

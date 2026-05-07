@@ -13,10 +13,10 @@ export const FinalCTA = ({ className = "" }: Props) => (
       </h2>
       <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
         <Link to="/watch" className="btn-primary">
-          Watch the videos <ArrowRight size={16} />
+          Watch breakdowns <ArrowRight size={16} />
         </Link>
         <Link to="/work-with-us" className="btn-default">
-          Work with us
+          Build your world
         </Link>
       </div>
     </div>
