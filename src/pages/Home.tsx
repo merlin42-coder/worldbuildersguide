@@ -158,9 +158,9 @@ const Home = () => {
               <div className="eyebrow mb-4">USE CASES</div>
             </Reveal>
             <Reveal>
-              <h2 className="font-display text-4xl md:text-5xl text-ink max-w-3xl leading-tight">
-                When a World Builders Guide actually helps
-              </h2>
+                <h2 className="font-display text-4xl md:text-5xl text-ink max-w-3xl leading-tight">
+                  When to use a<br />World Builders Guide
+                </h2>
             </Reveal>
 
             <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline border border-hairline">
