@@ -11,7 +11,7 @@ export const useCases: UseCase[] = [
   {
     icon: Layers,
     title: "Things got messy as you scaled",
-    detail: "Usually it's not a roadmap problem. No one shares the same picture of the product.",
+    detail: "Usually it's not a roadmap problem. It's that nobody shares the same picture of the product.",
   },
   {
     icon: Users,
@@ -21,7 +21,7 @@ export const useCases: UseCase[] = [
   {
     icon: Puzzle,
     title: "New features feel bolted on",
-    detail: "We figure out why they don't fit — and what would make them feel like they always belonged.",
+    detail: "Set the rules of your world before users start guessing them.",
   },
   {
     icon: Compass,
