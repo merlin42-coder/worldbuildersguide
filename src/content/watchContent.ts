@@ -39,7 +39,7 @@ export const watchContent: WatchItem[] = [
     brand: "Airbnb",
     duration: "7 min",
     description:
-      "The little wording and layout choices that make a listing feel like a place, not a database row.",
+      "Why Airbnb listings feel like places, not database rows",
     variant: 4,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/airbnb-product-world.mp4"),
