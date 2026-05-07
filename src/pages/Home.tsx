@@ -84,7 +84,7 @@ const Home = () => {
           <div className="container-wbg py-14">
             <Reveal>
               <p className="text-center text-sm md:text-base text-ink-muted">
-                Products we've pulled apart so far
+                Products we've broken down so far
               </p>
             </Reveal>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 opacity-60">
