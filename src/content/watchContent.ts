@@ -53,7 +53,7 @@ export const watchContent: WatchItem[] = [
     brand: "YouTube Music",
     duration: "6 min",
     description:
-      "Why YouTube Music feels like a search engine, not a place",
+      "Why YouTube Music feels like a place for exploring music",
     variant: 3,
     mediaType: "video",
     mediaUrl: mediaUrl("videos/youtube-music-product-world.mp4"),
