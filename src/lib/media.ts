@@ -1,5 +1,4 @@
-// Public URL helper for files stored in the Lovable Cloud "media" bucket.
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-
+// Resolve media paths relative to the site root so the app works
+// both at the domain root and under a subpath (e.g. GitHub Pages).
 export const mediaUrl = (path: string) =>
-  `${SUPABASE_URL}/storage/v1/object/public/media/${path.replace(/^\/+/, "")}`;
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
