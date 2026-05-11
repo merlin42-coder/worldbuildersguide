@@ -1,36 +1,73 @@
-# Sync the Watch library with cloud storage
+## Goal
 
-The current files in the `media` bucket are:
+Make the repo safe to push to a public GitHub repo and host on GitHub Pages — no API keys, no `.env`, no Supabase client code, no Supabase dependency. Media plays from local `public/` files instead.
 
-**videos/**: airbnb-product-world, revolut-vs-wise, spotify-product-world, spotify-vs-youtube-music, wise-product-world, youtube-music-product-world
-**audio/**: airbnb-deep-dive, revolut-deep-dive, spotify-deep-dive, wise-deep-dive, youtube-music-deep-dive
+## Context
 
-I'll update `src/content/watchContent.ts` so the library matches.
+Today only one thing in the app touches Supabase: `src/lib/media.ts` builds a public URL into the `media` storage bucket, and `src/content/watchContent.ts` uses it for 12 videos + audio clips. No database, no auth, no edge functions. The anon/publishable key in `.env` is technically safe to publish, but the cleanest answer to "no credentials in a public repo" is to remove Supabase altogether.
 
-## Changes to the library
+## Steps
 
-**Add — Product Worlds**
+### 1. Bring media into the repo
 
-- **Inside Wise** → `videos/wise-product-world.mp4`. Variant 4. Copy in the same voice as the other Product Worlds (about Wise's clarity around international transfers and FX).
+Download the 7 missing files from the `media` bucket in Lovable Cloud and commit them to `public/`:
 
-**Add — Deep Dives**
+```text
+public/
+  videos/
+    wise-product-world.mp4          (new)
+    revolut-vs-wise.mp4             (new)
+    airbnb-product-world.mp4        (already there)
+    revolut-product-world.mp4       (already there)
+    spotify-product-world.mp4       (already there)
+    spotify-vs-youtube-music.mp4    (already there)
+    youtube-music-product-world.mp4 (already there)
+  audio/
+    spotify-deep-dive.m4a           (new)
+    airbnb-deep-dive.m4a            (new)
+    youtube-music-deep-dive.m4a     (new)
+    revolut-deep-dive.m4a           (new)
+    wise-deep-dive.m4a              (new)
+```
 
-- **Wise, deep dive** → `audio/wise-deep-dive.m4a`. Variant 4.
+I'll fetch them from the bucket's public URLs and write them into `public/`. (Note: the bucket folders are `video/` and `audio/`; the local convention in code is `videos/` and `audio/`. I'll standardise on `videos/` + `audio/` locally to match the existing code.)
 
-**Add — Head to Head**
+### 2. Switch the URL helper to local paths
 
-- **Revolut vs Wise** → `videos/revolut-vs-wise.mp4`. Variant 5. Description framing the contrast between Revolut's "all-in-one money OS" feel and Wise's "send money abroad, no surprises" feel.
+Replace `src/lib/media.ts`:
 
-**Publish**
+```ts
+// Resolve media paths relative to the site root so GitHub Pages
+// (and any subpath deployment) work correctly.
+export const mediaUrl = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+```
 
-- Flip `revolut-deep-dive` from `published: false` to `true`.
+Using `import.meta.env.BASE_URL` (set via Vite's `base` config) future-proofs the GitHub Pages subpath case. No content changes needed in `src/content/watchContent.ts` — it keeps calling `mediaUrl("videos/...")` / `mediaUrl("audio/...")`.
 
-## Thumbnails
+### 3. Delete everything Supabase
 
-The new entries will fall back to the existing CSS-rendered `AbstractThumb` (variants 4 and 5) since there are no images for Wise / Revolut-vs-Wise in `public/thumbs/` yet. Same pattern as the unpublished Revolut deep dive used. If you want bespoke JPGs, drop them into `public/thumbs/` and I'll wire them up.
+- `src/integrations/supabase/` (entire folder: `client.ts`, `types.ts`)
+- `supabase/` (config.toml)
+- `.env` (only contained Supabase vars)
+- Remove `@supabase/supabase-js` from `package.json`
+- Verify nothing else imports `@/integrations/supabase/...` (already checked — nothing does)
 
-## Files touched
+### 4. GitHub Pages prep
 
-- `src/content/watchContent.ts` — add 3 new items, publish 1, remove 1.
+- Add `base: "/<repo-name>/"` to `vite.config.ts` (only if the repo is published at `username.github.io/<repo-name>`; skip if using a custom domain or `username.github.io` root). I'll ask you for the repo name before flipping this.
+- React Router note: GitHub Pages doesn't do SPA fallback. Add a `public/404.html` that redirects to `index.html` so deep links (e.g. `/watch`) survive refresh. Small standard snippet.
 
-No other code changes needed — `Watch.tsx`, `WatchCard`, and `MediaModal` already render whatever is in `publishedWatchContent`.
+### 5. Final sweep
+
+- `rg -n "supabase|VITE_SUPABASE|process.env|import.meta.env\.VITE_"` to confirm no stray references or secret reads remain.
+- Build once to confirm no missing imports.
+
+## What you can delete on the Lovable Cloud side afterwards
+
+Once the local files are working, the `media` bucket and the Supabase project are no longer used by the app. You can leave them or delete them — won't affect the deployed site.
+
+## What I need from you before implementing
+
+1. Confirm the GitHub repo name (or that it'll be served from a custom domain / `username.github.io` root) so I set `vite.config.ts` `base` correctly.
+2. Confirm it's OK that I commit ~7 media files into the repo (mp4 + m4a can add up; if size is a concern we could use Git LFS or keep them on a CDN — but those reintroduce a URL into the code).
