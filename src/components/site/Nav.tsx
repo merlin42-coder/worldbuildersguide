@@ -37,7 +37,7 @@ export const Nav = () => {
       <div className="container-wbg flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="" className="h-9 w-auto md:h-10" />
-          <span className="hidden sm:flex flex-col leading-[1.05] text-ink font-semibold tracking-[0.18em] text-[10px] md:text-[11px] border-l border-hairline pl-3">
+          <span className="hidden sm:flex flex-col leading-[1.05] text-ink font-medium tracking-[0.1em] text-[10px] md:text-[11px] border-l border-hairline pl-3">
             <span>WORLD</span>
             <span>BUILDERS</span>
             <span>GUIDE</span>

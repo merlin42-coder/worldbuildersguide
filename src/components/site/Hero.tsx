@@ -11,7 +11,7 @@ export const Hero = () => (
     <div className="container-wbg relative pt-12 md:pt-20 pb-20 md:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
       <div className="lg:col-span-7 relative z-10">
         <Reveal>
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.02] text-ink tracking-tight">
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.12] text-ink">
             <span className="block">Whatever you build</span>
             <span className="block">It’s a little world</span>
             <span className="block relative text-gold mt-1">
