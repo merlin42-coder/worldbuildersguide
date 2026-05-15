@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroGlobe from "@/assets/hero-globe.png";
+import squiggleUnderline from "@/assets/squiggle-underline.svg";
 import { Reveal } from "./Reveal";
 import { HeroDiagrams } from "./HeroDiagrams";
 
