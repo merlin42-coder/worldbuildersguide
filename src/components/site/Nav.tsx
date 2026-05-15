@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/wbg-logo.png";
 
 const links = [
-  { to: "/watch", label: "PRODUCT WORLD" },
+  { to: "/watch", label: "Watch" },
   { to: "/use-cases", label: "Use Cases" },
   { to: "/method", label: "Method" },
   { to: "/work-with-us", label: "Build your world" },
