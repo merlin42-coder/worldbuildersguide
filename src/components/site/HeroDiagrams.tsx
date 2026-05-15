@@ -162,7 +162,7 @@ export const HeroDiagrams = () => (
 
     {/* BOTTOM-CENTER — FLOW + RISKS */}
     <svg
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden xl:block"
       width={360}
       height={140}
       viewBox="0 0 360 140"
