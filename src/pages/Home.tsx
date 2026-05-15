@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { FloatingTiles } from "@/components/site/FloatingTiles";
+import { Hero } from "@/components/site/Hero";
 import { WatchCard } from "@/components/site/WatchCard";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { MediaModal } from "@/components/site/MediaModal";
@@ -28,48 +28,7 @@ const Home = () => {
     <>
       <Nav />
       <main>
-        {/* HERO */}
-        <section className="relative">
-          <div className="container-wbg pt-16 md:pt-24 pb-20 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <div className="eyebrow mb-6">A world-first product strategy studio</div>
-              </Reveal>
-              <Reveal delay={80}>
-                <h1 className="font-display text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] text-ink tracking-tight">
-                  Make products people just get.
-                </h1>
-              </Reveal>
-              <Reveal delay={180}>
-                <p className="mt-7 max-w-xl text-lg text-ink-muted leading-relaxed">
-                  We break down how Spotify, Airbnb and Revolut actually work — then help you build the same clarity into your product.
-                </p>
-                <p className="mt-3 max-w-xl text-lg text-ink-muted leading-relaxed">
-                  Using a simple document that defines how your product world behaves before you design anything.
-                </p>
-              </Reveal>
-              <Reveal delay={260}>
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <Link to="/watch" className="btn-primary">
-                    Watch breakdowns <ArrowRight size={16} />
-                  </Link>
-                  <Link to="/work-with-us" className="btn-default">
-                    Build your world
-                  </Link>
-                </div>
-                <p className="mt-4 text-sm text-ink-subtle">
-                  When the world is clear, product decisions become obvious.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-5">
-              <Reveal delay={120}>
-                <FloatingTiles />
-              </Reveal>
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         {/* TRUST */}
         <section className="hairline-top hairline-bottom">
