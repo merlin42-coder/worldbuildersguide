@@ -14,24 +14,8 @@ export const Hero = () => (
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] leading-[1.12] text-ink">
             <span className="block">Whatever you build</span>
             <span className="block">It’s a little world</span>
-            <span className="block">
-              <span className="relative inline-block text-gold mt-1">
-                Make it make sense.
-                <svg
-                  aria-hidden
-                  viewBox="0 0 600 18"
-                  preserveAspectRatio="none"
-                  className="absolute left-0 -bottom-2 w-full h-3 text-gold"
-                >
-                  <path
-                    d="M3 12 C 120 4, 280 16, 597 6"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                </svg>
-              </span>
+            <span className="block mt-1">
+              <span className="squiggle text-gold">Make it make sense.</span>
             </span>
           </h1>
         </Reveal>
