@@ -25,9 +25,9 @@ export const HeroDiagrams = () => (
   >
     {/* TOP-LEFT — PROBLEM */}
     <svg
-      className="absolute top-6 left-4 lg:left-10"
-      width={180}
-      height={100}
+      className="absolute top-4 left-4 lg:left-6 hidden lg:block"
+      width={140}
+      height={80}
       viewBox="0 0 180 100"
       fill="none"
     >
