@@ -5,7 +5,7 @@ export const Footer = () => {
     <footer className="hairline-top mt-32">
       <div className="container-wbg py-14 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <Link to="/" className="font-display text-xl text-ink tracking-tight">
+          <Link to="/" className="font-display text-xl text-ink">
             World Builders Guide
           </Link>
           <p className="mt-3 max-w-sm text-sm text-ink-muted">

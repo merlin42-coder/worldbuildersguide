@@ -45,7 +45,7 @@ const WorkWithUs = () => {
               <div className="eyebrow mb-6">BUILD YOUR WORLD</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="font-display text-5xl md:text-6xl text-ink leading-[1.05]">
+              <h1 className="font-display text-5xl md:text-6xl text-ink leading-[1.12]">
                 Sharper product clarity, on demand.
               </h1>
             </Reveal>
