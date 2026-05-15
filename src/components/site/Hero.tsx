@@ -16,7 +16,16 @@ export const Hero = () => (
             <span className="block">Whatever you build</span>
             <span className="block">It’s a little world</span>
             <span className="block mt-1">
-              <span className="squiggle text-gold">Make it make sense.</span>
+              <span className="relative inline-block text-gold">
+                Make it make sense.
+                <img
+                  src={squiggleUnderline}
+                  alt=""
+                  aria-hidden
+                  className="pointer-events-none absolute right-0 -bottom-3 w-[55%] h-3 select-none"
+                  draggable={false}
+                />
+              </span>
             </span>
           </h1>
         </Reveal>
