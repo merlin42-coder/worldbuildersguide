@@ -141,7 +141,7 @@ const WorkWithUs = () => {
             <Reveal className="lg:col-span-5">
               <div className="eyebrow mb-4">Contact</div>
               <h2 className="font-display text-4xl md:text-5xl text-ink leading-tight">
-                Tell me what world you're building.
+                Tell us what world you're building.
               </h2>
               <p className="mt-5 text-ink-muted max-w-md">
                 Short and direct is best. Early-stage ideas are welcome. Rough thoughts are fine.
@@ -150,15 +150,15 @@ const WorkWithUs = () => {
             <div className="lg:col-span-7">
               <Reveal delay={120}>
                 <div className="border-t border-hairline pt-10">
-                  <div className="eyebrow mb-3">Email me directly</div>
+                  <div className="eyebrow mb-3">Email us directly</div>
                   <a
-                    href="mailto:hi@gergelygurmai.me"
+                    href="mailto:hi@worldbuildersguide.com"
                     className="font-display text-3xl md:text-4xl text-ink hover:text-sage transition-colors break-all"
                   >
-                    hi@gergelygurmai.me
+                    hi@worldbuildersguide.com
                   </a>
                   <p className="mt-8 text-sm text-ink-subtle">
-                    I usually reply within 1–2 business days.
+                    We usually reply within 1–2 business days.
                   </p>
                 </div>
               </Reveal>
