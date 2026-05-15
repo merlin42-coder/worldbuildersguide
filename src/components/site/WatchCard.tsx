@@ -34,12 +34,9 @@ export const WatchCard = ({ item, featured = false, onPlay }: Props) => {
           <AbstractThumb variant={item.variant} className="border-0 border-b border-hairline" />
         )}
         {isAudio && (
-          <div className="absolute inset-0 bg-background/55 mix-blend-multiply" />
-        )}
-        {isAudio && (
           <div
             className="absolute inset-0"
-            style={{ backgroundColor: "hsl(var(--accent-sage) / 0.18)" }}
+            style={{ backgroundColor: "hsl(var(--accent-sage) / 0.14)" }}
           />
         )}
 
@@ -47,8 +44,8 @@ export const WatchCard = ({ item, featured = false, onPlay }: Props) => {
           <div
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg ${
               isAudio
-                ? "bg-background/85 backdrop-blur border border-sage/50 text-sage"
-                : "bg-sage text-background"
+                ? "bg-white/90 backdrop-blur border border-sage/50 text-sage"
+                : "bg-gold text-white"
             }`}
           >
             {isAudio ? (

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/wbg-logo.png";
 
 const links = [
   { to: "/watch", label: "PRODUCT WORLD" },
@@ -29,13 +30,18 @@ export const Nav = () => {
     <header
       className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-hairline"
+          ? "bg-white/85 backdrop-blur-md border-b border-hairline"
           : "bg-transparent"
       }`}
     >
       <div className="container-wbg flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="font-display text-lg md:text-xl text-ink tracking-tight">
-          World Builders Guide
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="" className="h-9 w-auto md:h-10" />
+          <span className="hidden sm:flex flex-col leading-[1.05] text-ink font-semibold tracking-[0.18em] text-[10px] md:text-[11px] border-l border-hairline pl-3">
+            <span>WORLD</span>
+            <span>BUILDERS</span>
+            <span>GUIDE</span>
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-9">
@@ -46,7 +52,7 @@ export const Nav = () => {
               className={({ isActive }) =>
                 `text-sm transition-colors hover:text-ink relative pb-1 ${
                   isActive
-                    ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-[2px] after:bg-sage"
+                    ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-[2px] after:bg-gold"
                     : "text-ink-muted"
                 }`
               }

@@ -35,6 +35,10 @@ export default {
           DEFAULT: "hsl(var(--accent-sage))",
           deep: "hsl(var(--accent-sage-deep))",
         },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          deep: "hsl(var(--gold-deep))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
