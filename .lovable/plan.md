@@ -1,39 +1,49 @@
-## Typography Update Plan
+## Goal
 
-### Overview
-Replace Fraunces with Literata for headings, tighten line-heights, remove editorial letter-spacing, and adjust weights to create a grounded, guide-like reading experience.
+Make the landing hero match the attached mockup's coherent, book-like editorial vibe. Today the headline is oversized and wrapping, the globe isn't visibly anchored on the right, the sketch diagrams are too faint to read, the background is pure white, and the logo lacks the little book mark.
 
-### Changes
+## Changes (frontend only — Hero, Nav, HeroDiagrams, index.css)
 
-#### 1. Font Loading (`index.html`)
-- Replace Fraunces Google Font link with **Literata** (weights 500, 600)
-- Update Inter weights to **400, 500, 600** (remove 300, 700 to avoid ultra-thin or unnecessarily heavy weights)
+### 1. Background — warm paper
 
-#### 2. Tailwind Config (`tailwind.config.ts`)
-- Update `fontFamily.display` to `Literata` (keep `serif` fallback)
+- `--background` from `0 0% 100%` (pure white) to a warm off-white (~`40 30% 98%`) so the page reads like book paper, matching the mockup.
+- Keep `--elevated` / `--elevated-2` consistent; bump them ~1% if needed for contrast.
 
-#### 3. Global CSS (`src/index.css`)
-- Change heading font-family from Fraunces to **Literata**
-- Remove `letter-spacing: -0.02em` from headings (normal spacing)
-- Set base heading styles:
-  - `h1`: font-weight **600**, line-height **1.12**
-  - `h2, h3`: font-weight **500**, line-height **1.25**
-  - `h4`: font-weight **500**
-- Body stays Inter 400 with line-height 1.6
+### 2. Headline sizing & layout (`Hero.tsx`)
 
-#### 4. Component Tweaks
-- **Hero.tsx**: Remove `tracking-tight` from h1 (already covered by base CSS); adjust `leading-[1.02]` → `leading-[1.12]`
-- **Footer.tsx**: Remove `tracking-tight` from footer brand link
-- **Nav.tsx**: Change logo wordmark from `font-semibold` to `font-medium` (Inter 500)
-- **Page H1s** (WorkWithUs, Method, UseCases, NotFound): Adjust overly tight `leading-[1.05]` → `leading-[1.12]`
-- **FinalCTA.tsx**: Adjust `leading-[1.05]` → `leading-[1.15]`
+- Reduce H1 scale so "Whatever you build" fits one line at the current viewport: `text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem]` (down from the current 5xl→7xl→[5.25rem]).
+- Tighten left column to `lg:col-span-6` (from 7) and globe to `lg:col-span-6` so the headline + image balance like the mockup.
+- Keep Literata 600 / leading 1.12 / no negative tracking.
 
-#### 5. Constraints Respected
-- No layout, spacing, or content changes
-- No color changes
-- Font sizes remain as-is
-- All-caps labels (eyebrows) preserved where they exist
-- No new all-caps introduced
+### 3. Globe image (`Hero.tsx`)
 
-### Outcome
-Headings shift from airy/editorial (Fraunces, tight tracking, ultra-tight line-height) to a calm, readable, confident guide feel (Literata, normal spacing, balanced line-heights). Body remains Inter for clarity.
+- Increase max width: `max-w-[420px] md:max-w-[560px] lg:max-w-[620px]`.
+- Remove the `Reveal` wrapper around the image (it currently delays visibility and may be why the image isn't rendering above the fold) — or keep `Reveal` but ensure container has min-height so the column doesn't collapse.
+- Add `lg:-mt-8` slight upward nudge so the globe overlaps the diagrams area like the mockup.
+
+### 4. Diagrams — readable, not invisible (`HeroDiagrams.tsx`)
+
+- Bump container opacity from `0.1` to `0.28` so the sketches read like real pencil notes.
+- Increase stroke widths slightly (0.5 → 0.7, 0.6 → 0.8) so they survive at higher opacity without looking heavy.
+- Add the sample text lines visible in the mockup to the PROBLEM card: "Too much complexity.", "Unclear choices.", "Teams misaligned.", "Outcome unknown." (replacing the generic horizontal lines).
+- Add a small "missing link" arrow note + a tiny line-chart squiggle at bottom-center to match the mockup's bottom-of-globe details.
+
+### 5. Logo lockup (`Nav.tsx`)
+
+- No changes.
+
+### 6. What we are NOT changing
+
+- No new pages, routes, copy edits, color palette changes (gold + sage stay), or layout outside the hero.
+- No business logic, data, or backend work.
+
+## Verification
+
+After edits: refresh preview, screenshot at 1239px width, confirm:
+
+- "Whatever you build" sits on one line
+- globe is visible top-right, comparable size to mockup
+- diagrams readable but still subordinate
+- background reads warm, not stark white  
+  
+This should also look good in Tablet and mobile mode

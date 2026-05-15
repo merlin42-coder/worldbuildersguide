@@ -21,7 +21,7 @@ export const HeroDiagrams = () => (
   <div
     aria-hidden
     className="pointer-events-none absolute inset-0 hidden md:block text-ink"
-    style={{ opacity: 0.1 }}
+    style={{ opacity: 0.28 }}
   >
     {/* TOP-LEFT — PROBLEM */}
     <svg
@@ -31,12 +31,12 @@ export const HeroDiagrams = () => (
       viewBox="0 0 180 100"
       fill="none"
     >
-      <rect x="1" y="1" width={178} height={98} stroke={stroke} strokeWidth="0.8" />
+      <rect x="1" y="1" width={178} height={98} stroke={stroke} strokeWidth="1" />
       <Label x="8" y="14">PROBLEM</Label>
-      <line x1="8" y1="30" x2="160" y2="30" stroke={stroke} strokeWidth="0.5" />
-      <line x1="8" y1="46" x2="150" y2="46" stroke={stroke} strokeWidth="0.5" />
-      <line x1="8" y1="62" x2="155" y2="62" stroke={stroke} strokeWidth="0.5" />
-      <line x1="8" y1="78" x2="140" y2="78" stroke={stroke} strokeWidth="0.5" />
+      <text x="8" y="34" fontFamily="Inter" fontSize="9" fill={stroke}>Too much complexity.</text>
+      <text x="8" y="50" fontFamily="Inter" fontSize="9" fill={stroke}>Unclear choices.</text>
+      <text x="8" y="66" fontFamily="Inter" fontSize="9" fill={stroke}>Teams misaligned.</text>
+      <text x="8" y="82" fontFamily="Inter" fontSize="9" fill={stroke}>Outcome unknown.</text>
     </svg>
 
     {/* TOP-CENTER — IDEA → DEFINE → BUILD → ITERATE + LEARN loop */}
