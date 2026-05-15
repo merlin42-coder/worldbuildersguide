@@ -26,12 +26,12 @@ export const HeroDiagrams = () => (
     {/* TOP-LEFT — PROBLEM */}
     <svg
       className="absolute top-6 left-4 lg:left-10"
-      width="180"
-      height="100"
+      width={180}
+      height={100}
       viewBox="0 0 180 100"
       fill="none"
     >
-      <rect x="1" y="1" width="178" height="98" stroke={stroke} strokeWidth="0.8" />
+      <rect x="1" y="1" width={178} height={98} stroke={stroke} strokeWidth="0.8" />
       <Label x="8" y="14">PROBLEM</Label>
       <line x1="8" y1="30" x2="160" y2="30" stroke={stroke} strokeWidth="0.5" />
       <line x1="8" y1="46" x2="150" y2="46" stroke={stroke} strokeWidth="0.5" />
@@ -42,12 +42,12 @@ export const HeroDiagrams = () => (
     {/* TOP-CENTER — IDEA → DEFINE → BUILD → ITERATE + LEARN loop */}
     <svg
       className="absolute top-2 left-1/2 -translate-x-1/2 hidden lg:block"
-      width="420"
-      height="120"
+      width={420}
+      height={120}
       viewBox="0 0 420 120"
       fill="none"
     >
-      <rect x="50" y="10" width="14" height="14" strokeDasharray="2 2" stroke={stroke} strokeWidth="0.6" />
+      <rect x="50" y="10" width={14} height={14} strokeDasharray="2 2" stroke={stroke} strokeWidth="0.6" />
       <text x="55" y="20" fontFamily="Inter" fontSize="8" fill={stroke}>?</text>
       {[
         { x: 90, label: "IDEA" },
@@ -56,7 +56,7 @@ export const HeroDiagrams = () => (
         { x: 330, label: "ITERATE" },
       ].map((b) => (
         <g key={b.label}>
-          <rect x={b.x} y="40" width="60" height="22" stroke={stroke} strokeWidth="0.6" />
+          <rect x={b.x} y="40" width={60} height={22} stroke={stroke} strokeWidth="0.6" />
           <text x={b.x + 30} y="54" textAnchor="middle" fontFamily="Inter" fontSize="8" fill={stroke}>
             {b.label}
           </text>
@@ -68,7 +68,7 @@ export const HeroDiagrams = () => (
           <polyline points={`${x + 16},48 ${x + 20},51 ${x + 16},54`} stroke={stroke} strokeWidth="0.6" fill="none" />
         </g>
       ))}
-      <rect x="220" y="86" width="60" height="22" stroke={stroke} strokeWidth="0.6" />
+      <rect x="220" y="86" width={60} height={22} stroke={stroke} strokeWidth="0.6" />
       <text x="250" y="100" textAnchor="middle" fontFamily="Inter" fontSize="8" fill={stroke}>LEARN</text>
       <line x1="250" y1="62" x2="250" y2="86" strokeDasharray="2 2" stroke={stroke} strokeWidth="0.6" />
       <line x1="220" y1="97" x2="200" y2="97" strokeDasharray="2 2" stroke={stroke} strokeWidth="0.6" />
@@ -78,12 +78,12 @@ export const HeroDiagrams = () => (
     {/* TOP-RIGHT — SYSTEM OVERVIEW */}
     <svg
       className="absolute top-6 right-4 lg:right-10 hidden lg:block"
-      width="220"
-      height="140"
+      width={220}
+      height={140}
       viewBox="0 0 220 140"
       fill="none"
     >
-      <rect x="1" y="1" width="218" height="138" stroke={stroke} strokeWidth="0.7" />
+      <rect x="1" y="1" width={218} height={138} stroke={stroke} strokeWidth="0.7" />
       <Label x="8" y="14">SYSTEM OVERVIEW (WIP)</Label>
       {[
         { x: 20, y: 30, w: 50, h: 22, label: "USERS" },
@@ -109,8 +109,8 @@ export const HeroDiagrams = () => (
     {/* MID-RIGHT — USER NEED venn */}
     <svg
       className="absolute top-1/2 right-4 lg:right-16 -translate-y-1/4 hidden lg:block"
-      width="180"
-      height="180"
+      width={180}
+      height={180}
       viewBox="0 0 180 180"
       fill="none"
     >
@@ -129,8 +129,8 @@ export const HeroDiagrams = () => (
     {/* BOTTOM-LEFT — USER JOURNEY */}
     <svg
       className="absolute bottom-4 left-4 lg:left-10"
-      width="320"
-      height="170"
+      width={320}
+      height={170}
       viewBox="0 0 320 170"
       fill="none"
     >
@@ -148,8 +148,8 @@ export const HeroDiagrams = () => (
         );
       })}
       {/* wireframe rectangle */}
-      <rect x="0" y="95" width="120" height="70" stroke={stroke} strokeWidth="0.6" />
-      <rect x="8" y="103" width="50" height="34" stroke={stroke} strokeWidth="0.5" />
+      <rect x="0" y="95" width={120} height={70} stroke={stroke} strokeWidth="0.6" />
+      <rect x="8" y="103" width={50} height={34} stroke={stroke} strokeWidth="0.5" />
       <line x1="8" y1="103" x2="58" y2="137" stroke={stroke} strokeWidth="0.4" />
       <line x1="58" y1="103" x2="8" y2="137" stroke={stroke} strokeWidth="0.4" />
       <line x1="8" y1="146" x2="100" y2="146" stroke={stroke} strokeWidth="0.4" />
@@ -163,8 +163,8 @@ export const HeroDiagrams = () => (
     {/* BOTTOM-CENTER — FLOW + RISKS */}
     <svg
       className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
-      width="360"
-      height="140"
+      width={360}
+      height={140}
       viewBox="0 0 360 140"
       fill="none"
     >
@@ -173,7 +173,7 @@ export const HeroDiagrams = () => (
         const x = i * 90;
         return (
           <g key={l}>
-            <rect x={x} y="20" width="60" height="22" stroke={stroke} strokeWidth="0.6" />
+            <rect x={x} y="20" width={60} height={22} stroke={stroke} strokeWidth="0.6" />
             <text x={x + 30} y="34" textAnchor="middle" fontFamily="Inter" fontSize="8" fill={stroke}>{l}</text>
             {i < 2 && (
               <>
@@ -203,19 +203,19 @@ export const HeroDiagrams = () => (
     {/* BOTTOM-RIGHT — STRUCTURE tree + WIP note */}
     <svg
       className="absolute bottom-2 right-4 lg:right-10 hidden lg:block"
-      width="220"
-      height="180"
+      width={220}
+      height={180}
       viewBox="0 0 220 180"
       fill="none"
     >
       <Label x="0" y="10">STRUCTURE (WORKING)</Label>
-      <rect x="90" y="20" width="40" height="18" stroke={stroke} strokeWidth="0.6" />
+      <rect x="90" y="20" width={40} height={18} stroke={stroke} strokeWidth="0.6" />
       <line x1="110" y1="38" x2="110" y2="50" stroke={stroke} strokeWidth="0.5" />
       <line x1="40" y1="50" x2="180" y2="50" stroke={stroke} strokeWidth="0.5" />
       {[40, 90, 140, 180].map((x, i) => (
         <g key={i}>
           <line x1={x} y1="50" x2={x} y2="62" stroke={stroke} strokeWidth="0.5" />
-          <rect x={x - 18} y="62" width="36" height="18" strokeDasharray="2 2" stroke={stroke} strokeWidth="0.5" />
+          <rect x={x - 18} y="62" width={36} height={18} strokeDasharray="2 2" stroke={stroke} strokeWidth="0.5" />
         </g>
       ))}
       <text x="0" y="120" fontFamily="Inter" fontSize="7" fill={stroke}>★</text>
