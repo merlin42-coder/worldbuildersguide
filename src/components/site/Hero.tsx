@@ -9,9 +9,9 @@ export const Hero = () => (
     <HeroDiagrams />
 
     <div className="container-wbg relative pt-12 md:pt-20 pb-20 md:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-      <div className="lg:col-span-6 relative z-10">
+      <div className="lg:col-span-7 relative z-10">
         <Reveal>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] leading-[1.12] text-ink">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] leading-[1.12] text-ink">
             <span className="block">Whatever you build</span>
             <span className="block">It’s a little world</span>
             <span className="block relative text-gold mt-1">
@@ -58,7 +58,7 @@ export const Hero = () => (
         </Reveal>
       </div>
 
-      <div className="lg:col-span-6 relative z-10 flex justify-center lg:-mt-8">
+      <div className="lg:col-span-5 relative z-10 flex justify-center lg:-mt-8">
         <img
           src={heroGlobe}
           alt="A small illustrated world with a person sketching its system on top"
