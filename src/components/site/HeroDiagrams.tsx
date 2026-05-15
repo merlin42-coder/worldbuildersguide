@@ -4,7 +4,7 @@
 
 const stroke = "currentColor";
 
-const Label = ({ x, y, children, size = 9 }: { x: number; y: number; children: string; size?: number }) => (
+const Label = ({ x, y, children, size = 9 }: { x: number | string; y: number | string; children: string; size?: number }) => (
   <text
     x={x}
     y={y}
