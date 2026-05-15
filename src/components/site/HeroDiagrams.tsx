@@ -21,7 +21,7 @@ export const HeroDiagrams = () => (
   <div
     aria-hidden
     className="pointer-events-none absolute inset-0 hidden md:block text-ink"
-    style={{ opacity: 0.28 }}
+    style={{ opacity: 0.18 }}
   >
     {/* TOP-LEFT — PROBLEM */}
     <svg
