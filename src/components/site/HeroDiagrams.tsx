@@ -128,7 +128,7 @@ export const HeroDiagrams = () => (
 
     {/* BOTTOM-LEFT — USER JOURNEY */}
     <svg
-      className="absolute bottom-4 left-4 lg:left-10"
+      className="absolute bottom-4 left-4 lg:left-10 hidden xl:block"
       width={320}
       height={170}
       viewBox="0 0 320 170"
