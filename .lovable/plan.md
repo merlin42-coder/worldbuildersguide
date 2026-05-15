@@ -1,73 +1,76 @@
 ## Goal
 
-Make the repo safe to push to a public GitHub repo and host on GitHub Pages — no API keys, no `.env`, no Supabase client code, no Supabase dependency. Media plays from local `public/` files instead.
+Add the 3 Booking.com items to the landing/watch library, add BOOKING to the "Products we've broken down so far" strip, and fully purge the auto-regenerated Supabase scaffolding so the repo stays credential-free for GitHub Pages.
 
-## Context
+## Current state (verified)
 
-Today only one thing in the app touches Supabase: `src/lib/media.ts` builds a public URL into the `media` storage bucket, and `src/content/watchContent.ts` uses it for 12 videos + audio clips. No database, no auth, no edge functions. The anon/publishable key in `.env` is technically safe to publish, but the cleanest answer to "no credentials in a public repo" is to remove Supabase altogether.
+- All 9 videos and 6 audio files (including the 3 new Booking ones) are in `public/videos/` and `public/audio/`. Filenames match the user's spec:
+  - `public/videos/booking-product-world.mp4`
+  - `public/videos/airbnb-vs-booking.mp4`
+  - `public/audio/booking-deep-dive.m4a`
+- `.env` is gone. Good.
+- `src/integrations/supabase/{client,types}.ts` and `supabase/config.toml` have been auto-regenerated since the last cleanup. Need to delete again.
+- `src/lib/media.ts` already resolves to `${BASE_URL}<path>` — so `mediaUrl("videos/booking-product-world.mp4")` serves the local file. No URL changes needed.
+- `src/pages/Home.tsx` line 18: `STUDIED_PRODUCTS = ["SPOTIFY", "AIRBNB", "REVOLUT", "YOUTUBE MUSIC", "WISE"]`.
 
-## Steps
+## Changes
 
-### 1. Bring media into the repo
+### 1. Add 3 Booking entries in `src/content/watchContent.ts`
 
-Download the 7 missing files from the `media` bucket in Lovable Cloud and commit them to `public/`:
+Append to the existing arrays in their respective category sections:
 
-```text
-public/
-  videos/
-    wise-product-world.mp4          (new)
-    revolut-vs-wise.mp4             (new)
-    airbnb-product-world.mp4        (already there)
-    revolut-product-world.mp4       (already there)
-    spotify-product-world.mp4       (already there)
-    spotify-vs-youtube-music.mp4    (already there)
-    youtube-music-product-world.mp4 (already there)
-  audio/
-    spotify-deep-dive.m4a           (new)
-    airbnb-deep-dive.m4a            (new)
-    youtube-music-deep-dive.m4a     (new)
-    revolut-deep-dive.m4a           (new)
-    wise-deep-dive.m4a              (new)
-```
+- **Product Worlds** — `booking-product-world`
+  - title: "Inside Booking"
+  - brand: "Booking"
+  - duration: "7 min"
+  - description: "Why Booking turns travel chaos into a clear next step"
+  - mediaUrl: `mediaUrl("videos/booking-product-world.mp4")`
+  - thumbnailUrl: `/thumbs/booking-product-world.jpg` (file may not exist yet → falls back to `AbstractThumb`, matches existing pattern)
+  - variant: 3, mediaType: "video", published: true
 
-I'll fetch them from the bucket's public URLs and write them into `public/`. (Note: the bucket folders are `video/` and `audio/`; the local convention in code is `videos/` and `audio/`. I'll standardise on `videos/` + `audio/` locally to match the existing code.)
+- **Deep Dives** — `booking-deep-dive`
+  - title: "Booking, deep dive"
+  - brand: "Booking"
+  - duration: "18 min"
+  - description: "How Booking turns the most stressful part of travel — picking where to stay — into something you can finish in five minutes."
+  - mediaUrl: `mediaUrl("audio/booking-deep-dive.m4a")`
+  - thumbnailUrl: `/thumbs/booking-product-world.jpg`
+  - variant: 3, mediaType: "audio", published: true
 
-### 2. Switch the URL helper to local paths
+- **Head to Head** — `airbnb-vs-booking`
+  - title: "Airbnb vs Booking"
+  - brand: "Airbnb · Booking"
+  - duration: "8 min"
+  - description: "One sells you a place to belong. The other sells you a place to sleep tonight. Two very different ideas of what travel feels like."
+  - mediaUrl: `mediaUrl("videos/airbnb-vs-booking.mp4")`
+  - thumbnailUrl: `/thumbs/airbnb-vs-booking.jpg`
+  - variant: 5, mediaType: "video", published: true
 
-Replace `src/lib/media.ts`:
+### 2. Add BOOKING to `src/pages/Home.tsx`
 
 ```ts
-// Resolve media paths relative to the site root so GitHub Pages
-// (and any subpath deployment) work correctly.
-export const mediaUrl = (path: string) =>
-  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+const STUDIED_PRODUCTS = ["SPOTIFY", "AIRBNB", "BOOKING", "REVOLUT", "YOUTUBE MUSIC", "WISE"];
 ```
 
-Using `import.meta.env.BASE_URL` (set via Vite's `base` config) future-proofs the GitHub Pages subpath case. No content changes needed in `src/content/watchContent.ts` — it keeps calling `mediaUrl("videos/...")` / `mediaUrl("audio/...")`.
+### 3. Purge Supabase again
 
-### 3. Delete everything Supabase
+Delete:
+- `src/integrations/supabase/client.ts`
+- `src/integrations/supabase/types.ts`
+- `src/integrations/supabase/` (the whole folder)
+- `supabase/config.toml`
+- `supabase/` folder
 
-- `src/integrations/supabase/` (entire folder: `client.ts`, `types.ts`)
-- `supabase/` (config.toml)
-- `.env` (only contained Supabase vars)
-- Remove `@supabase/supabase-js` from `package.json`
-- Verify nothing else imports `@/integrations/supabase/...` (already checked — nothing does)
+Confirm `package.json` has no `@supabase/supabase-js` (it was already removed; will re-verify).
 
-### 4. GitHub Pages prep
+Note: Lovable's backend tooling tends to regenerate `client.ts`/`types.ts`/`config.toml` automatically when Lovable Cloud is enabled on the project. To stop this from coming back after every regeneration, **disable Lovable Cloud** for this project from Connectors → Lovable Cloud once you're happy with the cleanup. I'll flag this in the final message.
 
-- Add `base: "/<repo-name>/"` to `vite.config.ts` (only if the repo is published at `username.github.io/<repo-name>`; skip if using a custom domain or `username.github.io` root). I'll ask you for the repo name before flipping this.
-- React Router note: GitHub Pages doesn't do SPA fallback. Add a `public/404.html` that redirects to `index.html` so deep links (e.g. `/watch`) survive refresh. Small standard snippet.
+### 4. Verify
 
-### 5. Final sweep
+- `rg -n "supabase|VITE_SUPABASE" src package.json` → should return nothing.
+- Visual check that all three Booking cards appear in the right Watch sections and BOOKING shows in the Home strip.
 
-- `rg -n "supabase|VITE_SUPABASE|process.env|import.meta.env\.VITE_"` to confirm no stray references or secret reads remain.
-- Build once to confirm no missing imports.
+## Notes
 
-## What you can delete on the Lovable Cloud side afterwards
-
-Once the local files are working, the `media` bucket and the Supabase project are no longer used by the app. You can leave them or delete them — won't affect the deployed site.
-
-## What I need from you before implementing
-
-1. Confirm the GitHub repo name (or that it'll be served from a custom domain / `username.github.io` root) so I set `vite.config.ts` `base` correctly.
-2. Confirm it's OK that I commit ~7 media files into the repo (mp4 + m4a can add up; if size is a concern we could use Git LFS or keep them on a CDN — but those reintroduce a URL into the code).
+- No thumbnails for the new Booking items yet — they'll use the `AbstractThumb` fallback automatically (same as the previous batch). If you want bespoke thumbnails, say the word and I'll generate them.
+- `mediaUrl` already prefixes with `import.meta.env.BASE_URL`, so when you set `base` in `vite.config.ts` for the GitHub Pages subpath later, every video/audio URL adjusts automatically.
