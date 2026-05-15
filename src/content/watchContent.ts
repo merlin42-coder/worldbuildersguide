@@ -88,6 +88,20 @@ export const watchContent: WatchItem[] = [
     thumbnailUrl: "/thumbs/revolut-product-world.jpg",
     published: true,
   },
+  {
+    id: "booking-product-world",
+    title: "Inside Booking",
+    category: "Product Worlds",
+    brand: "Booking",
+    duration: "7 min",
+    description:
+      "Why Booking turns travel chaos into a clear next step",
+    variant: 3,
+    mediaType: "video",
+    mediaUrl: mediaUrl("videos/booking-product-world.mp4"),
+    thumbnailUrl: "/thumbs/booking-product-world.jpg",
+    published: true,
+  },
 
   // ============ DEEP DIVES (audio) ============
   {
@@ -160,6 +174,20 @@ export const watchContent: WatchItem[] = [
     thumbnailUrl: "/thumbs/wise-product-world.jpg",
     published: true,
   },
+  {
+    id: "booking-deep-dive",
+    title: "Booking, deep dive",
+    category: "Deep Dives",
+    brand: "Booking",
+    duration: "18 min",
+    description:
+      "How Booking turns the most stressful part of travel — picking where to stay — into something you can finish in five minutes.",
+    variant: 3,
+    mediaType: "audio",
+    mediaUrl: mediaUrl("audio/booking-deep-dive.m4a"),
+    thumbnailUrl: "/thumbs/booking-product-world.jpg",
+    published: true,
+  },
 
   // ============ HEAD TO HEAD (video) ============
   {
@@ -188,6 +216,20 @@ export const watchContent: WatchItem[] = [
     mediaType: "video",
     mediaUrl: mediaUrl("videos/revolut-vs-wise.mp4"),
     thumbnailUrl: "/thumbs/revolut-vs-wise.jpg",
+    published: true,
+  },
+  {
+    id: "airbnb-vs-booking",
+    title: "Airbnb vs Booking",
+    category: "Head to Head",
+    brand: "Airbnb · Booking",
+    duration: "8 min",
+    description:
+      "One sells you a place to belong. The other sells you a place to sleep tonight. Two very different ideas of what travel feels like.",
+    variant: 5,
+    mediaType: "video",
+    mediaUrl: mediaUrl("videos/airbnb-vs-booking.mp4"),
+    thumbnailUrl: "/thumbs/airbnb-vs-booking.jpg",
     published: true,
   },
 ];
