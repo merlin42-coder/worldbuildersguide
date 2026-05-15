@@ -47,10 +47,10 @@ export const Hero = () => (
 
         <Reveal delay={240}>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link to="/watch" className="btn-primary">
+            <Link to="/watch" className="btn-primary h-11 min-w-[200px]">
               Watch breakdowns <ArrowRight size={16} />
             </Link>
-            <Link to="/work-with-us" className="btn-default">
+            <Link to="/work-with-us" className="btn-default h-11 min-w-[200px]">
               Build your world
             </Link>
           </div>
