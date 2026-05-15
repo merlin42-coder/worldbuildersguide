@@ -21,13 +21,13 @@ export const HeroDiagrams = () => (
   <div
     aria-hidden
     className="pointer-events-none absolute inset-0 hidden md:block text-ink"
-    style={{ opacity: 0.28 }}
+    style={{ opacity: 0.18 }}
   >
     {/* TOP-LEFT — PROBLEM */}
     <svg
-      className="absolute top-6 left-4 lg:left-10"
-      width={180}
-      height={100}
+      className="absolute top-4 left-4 lg:left-6 hidden lg:block"
+      width={140}
+      height={80}
       viewBox="0 0 180 100"
       fill="none"
     >
@@ -128,7 +128,7 @@ export const HeroDiagrams = () => (
 
     {/* BOTTOM-LEFT — USER JOURNEY */}
     <svg
-      className="absolute bottom-4 left-4 lg:left-10"
+      className="absolute bottom-4 left-4 lg:left-10 hidden xl:block"
       width={320}
       height={170}
       viewBox="0 0 320 170"
@@ -162,7 +162,7 @@ export const HeroDiagrams = () => (
 
     {/* BOTTOM-CENTER — FLOW + RISKS */}
     <svg
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden xl:block"
       width={360}
       height={140}
       viewBox="0 0 360 140"

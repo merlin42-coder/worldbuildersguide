@@ -1,49 +1,32 @@
-## Goal
+## Fixes
 
-Make the landing hero match the attached mockup's coherent, book-like editorial vibe. Today the headline is oversized and wrapping, the globe isn't visibly anchored on the right, the sketch diagrams are too faint to read, the background is pure white, and the logo lacks the little book mark.
+**1. Pure white background**
+- `src/index.css`: `--background`, `--surface` → `0 0% 100%`. Keep `--elevated` / `--elevated-2` slightly off-white so cards still have separation (e.g. `40 25% 97%` and `40 20% 94%`).
 
-## Changes (frontend only — Hero, Nav, HeroDiagrams, index.css)
+**2. Navigation bar — no wrapping at any size**
+- `Nav.tsx`: rename "PRODUCT WORLD" → "Watch" in the nav links array (label only; route stays `/watch`). The long label is what causes the tablet wrap shown in the mockup.
+- Reduce horizontal gap from `gap-9` → `gap-6 lg:gap-8`.
+- Switch nav breakpoint from `md` → `lg` so tablets get the mobile menu instead of a cramped wrap. Same for the "Watch breakdowns" header CTA and burger toggle.
+- Keep wordmark hidden on `<sm`, prevent flex shrinking with `shrink-0` on logo + CTA.
 
-### 1. Background — warm paper
+**3. Background illustrations not overlapping text**
+- `HeroDiagrams.tsx`: wrap content so it sits behind, not on top of, the headline column.
+  - Lower z-index isn't the issue (text already has `z-10`); the visual problem is the PROBLEM box and FLOW/RISKS sketches sitting under the headline + subcopy area at this viewport.
+  - Move PROBLEM sketch from `top-6 left-4` → only render at `lg:` and shift to `lg:left-6 lg:top-4`, smaller (140×80).
+  - Hide BOTTOM-CENTER FLOW/RISKS until `xl:` (it currently sits over the buttons + tagline).
+  - Hide BOTTOM-LEFT USER JOURNEY until `xl:` too — it overlaps the tagline.
+  - Drop container opacity from `0.28` back to `0.18` so any residual overlap reads as a watermark, not competing text.
 
-- `--background` from `0 0% 100%` (pure white) to a warm off-white (~`40 30% 98%`) so the page reads like book paper, matching the mockup.
-- Keep `--elevated` / `--elevated-2` consistent; bump them ~1% if needed for contrast.
+**4. Equal-size CTAs**
+- `index.css`: make `.btn-default` match `.btn-primary` height (`h-10` instead of `h-9`) and add `min-w-[170px]` to both so "Watch breakdowns" and "Build your world" render the same width. Or apply `min-w` directly in `Hero.tsx` to keep the global buttons untouched — preferred: scoped fix in Hero only.
+- In `Hero.tsx`, wrap both links with a shared class: `inline-flex items-center justify-center min-w-[190px] h-11`.
 
-### 2. Headline sizing & layout (`Hero.tsx`)
+**5. Underline only under text, not whitespace**
+- `Hero.tsx`: the gold squiggle currently spans the full block width (`w-[88%]`). The `<span>` containing "Make it make sense." is `block`, so it stretches.
+- Change the wrapping span to `inline-block` (so its width = text width), and set the SVG to `w-full` of that inline-block. Drop the hardcoded `viewBox` width assumption — keep `preserveAspectRatio="none"` so the curve scales to the actual text width on every breakpoint.
 
-- Reduce H1 scale so "Whatever you build" fits one line at the current viewport: `text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem]` (down from the current 5xl→7xl→[5.25rem]).
-- Tighten left column to `lg:col-span-6` (from 7) and globe to `lg:col-span-6` so the headline + image balance like the mockup.
-- Keep Literata 600 / leading 1.12 / no negative tracking.
-
-### 3. Globe image (`Hero.tsx`)
-
-- Increase max width: `max-w-[420px] md:max-w-[560px] lg:max-w-[620px]`.
-- Remove the `Reveal` wrapper around the image (it currently delays visibility and may be why the image isn't rendering above the fold) — or keep `Reveal` but ensure container has min-height so the column doesn't collapse.
-- Add `lg:-mt-8` slight upward nudge so the globe overlaps the diagrams area like the mockup.
-
-### 4. Diagrams — readable, not invisible (`HeroDiagrams.tsx`)
-
-- Bump container opacity from `0.1` to `0.28` so the sketches read like real pencil notes.
-- Increase stroke widths slightly (0.5 → 0.7, 0.6 → 0.8) so they survive at higher opacity without looking heavy.
-- Add the sample text lines visible in the mockup to the PROBLEM card: "Too much complexity.", "Unclear choices.", "Teams misaligned.", "Outcome unknown." (replacing the generic horizontal lines).
-- Add a small "missing link" arrow note + a tiny line-chart squiggle at bottom-center to match the mockup's bottom-of-globe details.
-
-### 5. Logo lockup (`Nav.tsx`)
-
-- No changes.
-
-### 6. What we are NOT changing
-
-- No new pages, routes, copy edits, color palette changes (gold + sage stay), or layout outside the hero.
-- No business logic, data, or backend work.
-
-## Verification
-
-After edits: refresh preview, screenshot at 1239px width, confirm:
-
-- "Whatever you build" sits on one line
-- globe is visible top-right, comparable size to mockup
-- diagrams readable but still subordinate
-- background reads warm, not stark white  
-  
-This should also look good in Tablet and mobile mode
+## Files touched
+- `src/index.css` — background tokens
+- `src/components/site/Nav.tsx` — label, gaps, breakpoint
+- `src/components/site/HeroDiagrams.tsx` — opacity + per-sketch breakpoints/positions
+- `src/components/site/Hero.tsx` — CTA sizing, underline span becomes inline-block

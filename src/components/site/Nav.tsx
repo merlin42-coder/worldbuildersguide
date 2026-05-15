@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/wbg-logo.png";
 
 const links = [
-  { to: "/watch", label: "PRODUCT WORLD" },
+  { to: "/watch", label: "Watch" },
   { to: "/use-cases", label: "Use Cases" },
   { to: "/method", label: "Method" },
   { to: "/work-with-us", label: "Build your world" },
@@ -34,8 +34,8 @@ export const Nav = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container-wbg flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-3">
+      <div className="container-wbg flex h-16 items-center justify-between md:h-20 gap-4">
+        <Link to="/" className="flex items-center gap-3 shrink-0">
           <img src={logo} alt="" className="h-9 w-auto md:h-10" />
           <span className="hidden sm:flex flex-col leading-[1.05] text-ink font-medium tracking-[0.1em] text-[10px] md:text-[11px] border-l border-hairline pl-3">
             <span>WORLD</span>
@@ -44,13 +44,13 @@ export const Nav = () => {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {links.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `text-sm transition-colors hover:text-ink relative pb-1 ${
+                `text-sm whitespace-nowrap transition-colors hover:text-ink relative pb-1 ${
                   isActive
                     ? "text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-[2px] after:bg-gold"
                     : "text-ink-muted"
@@ -62,14 +62,14 @@ export const Nav = () => {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Link to="/watch" className="btn-primary">
+        <div className="hidden lg:block shrink-0">
+          <Link to="/watch" className="btn-primary whitespace-nowrap">
             Watch breakdowns
           </Link>
         </div>
 
         <button
-          className="md:hidden text-ink p-2 -mr-2"
+          className="lg:hidden text-ink p-2 -mr-2"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
         >
@@ -78,7 +78,7 @@ export const Nav = () => {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-hairline bg-background">
+        <div className="lg:hidden border-t border-hairline bg-background">
           <div className="container-wbg py-6 flex flex-col gap-5">
             {links.map((l) => (
               <NavLink
