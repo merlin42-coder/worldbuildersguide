@@ -18,7 +18,7 @@ const UseCases = () => {
               <div className="eyebrow mb-6">Use Cases</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="font-display text-5xl md:text-6xl text-ink leading-[1.05]">
+              <h1 className="font-display text-5xl md:text-6xl text-ink leading-[1.12]">
                 When the world inside your product needs sharpening.
               </h1>
             </Reveal>
