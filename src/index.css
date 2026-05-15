@@ -8,11 +8,11 @@
 
 @layer base {
   :root {
-    /* Surfaces — light editorial */
-    --background: 0 0% 100%;
-    --surface: 0 0% 100%;
-    --elevated: 40 25% 98%;          /* warm off-white card */
-    --elevated-2: 40 18% 95%;
+    /* Surfaces — warm paper, book-like */
+    --background: 40 30% 97%;
+    --surface: 40 30% 97%;
+    --elevated: 40 28% 95%;          /* warm off-white card */
+    --elevated-2: 40 22% 92%;
 
     /* Ink — dark grey */
     --foreground: 220 13% 18%;
