@@ -36,9 +36,10 @@ jobs:
 
       - name: Build
         env:
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
-          VITE_SUPABASE_PROJECT_ID: ${{ vars.VITE_SUPABASE_PROJECT_ID }}
+          # Public Lovable Cloud values — safe to commit (publishable anon key only).
+          VITE_SUPABASE_URL: https://zjephlkiesyzsgwtlbrv.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqZXBobGtpZXN5enNnd3RsYnJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5MTQzNDMsImV4cCI6MjA5MzQ5MDM0M30.ez92zBf2awKaD7HC7ArMsvE9zUBElITTQzFW3tYtmqk
+          VITE_SUPABASE_PROJECT_ID: zjephlkiesyzsgwtlbrv
         run: npm run build
 
       - name: Add SPA fallback
